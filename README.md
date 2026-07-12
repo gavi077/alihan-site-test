@@ -1,2 +1,2 @@
-# alihan-site-test
+# alihan-test
 Сайт портфолио о моей работе
