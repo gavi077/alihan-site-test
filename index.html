@@ -4,18 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#071018">
-<title>Alikhan Dzuev — Intelligent Developments</title>
+<title>Alikhan Dzuev — Engineering Developments</title>
 <style>
-:root{--bg:#071018;--panel:#0c1924;--line:#213746;--text:#eaf3f8;--muted:#86a0b3;--accent:#43c9ff;--ok:#5fe0a3}
+:root{--line:#213746;--text:#eaf3f8;--muted:#86a0b3;--accent:#43c9ff;--panel:#0c1924}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;min-height:100vh;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 82% 0,#123047 0,#071018 38%,#050b10 100%);color:var(--text)}
-button,input{font:inherit}
+button,input{font:inherit} a{color:inherit}
 .site{min-height:100vh;padding:18px;display:flex;flex-direction:column}
 .site-nav{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:20px 28px;border:1px solid var(--line);border-radius:22px;background:rgba(7,18,27,.84);backdrop-filter:blur(16px);box-shadow:0 14px 50px rgba(0,0,0,.18)}
-.logo{font-size:14px;font-weight:800;letter-spacing:.18em;white-space:nowrap}
-.menu{display:flex;gap:9px;align-items:center}
-.menu button{border:1px solid #2b5269;background:linear-gradient(135deg,#123247,#0c2230);color:#edf8fd;font-size:13px;padding:13px 20px;border-radius:13px;cursor:pointer;box-shadow:inset 0 1px rgba(255,255,255,.04)}
+.logo-block{min-width:0}.logo{font-size:14px;font-weight:800;letter-spacing:.18em;white-space:nowrap}.top-credit,.modal-credit,.viewer-credit{color:var(--accent);font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.top-credit{margin-top:5px}
+.menu button{border:1px solid #2b5269;background:linear-gradient(135deg,#123247,#0c2230);color:#edf8fd;font-size:13px;padding:13px 20px;border-radius:13px;cursor:pointer}
 .menu button:hover{border-color:var(--accent)}
 .hero{max-width:960px;margin:auto;text-align:center;padding:120px 18px 90px}
 .hero small{display:block;color:var(--accent);letter-spacing:.22em;font-size:13px;line-height:1.65}
@@ -25,238 +24,840 @@ button,input{font:inherit}
 .hero-btn:hover{border-color:var(--accent);transform:translateY(-1px)}
 .credit-home{text-align:center;color:#647f90;font-size:9px;letter-spacing:.13em;text-transform:uppercase;padding:0 12px 20px}
 .credit-home strong{color:var(--accent)}
-
-/* Overlay */
 .modal{position:fixed;inset:0;z-index:1000;display:none;padding:18px;background:rgba(2,7,11,.82);backdrop-filter:blur(13px);overflow:auto}
 .modal.open{display:block}
 .modal-shell{max-width:1220px;margin:18px auto;background:linear-gradient(145deg,#0d1b27,#07121a);border:1px solid #284354;border-radius:22px;box-shadow:0 30px 100px rgba(0,0,0,.58);overflow:hidden}
 .modal-head{position:sticky;top:0;z-index:3;display:flex;justify-content:space-between;gap:20px;align-items:center;padding:21px 23px;background:rgba(8,19,27,.95);border-bottom:1px solid var(--line);backdrop-filter:blur(18px)}
-.modal-head small{color:var(--accent);letter-spacing:.17em;font-size:9px}
-.modal-head h2{margin:5px 0 0;font-size:24px}
+.modal-credit{margin-bottom:6px}.modal-head small{color:var(--accent);letter-spacing:.17em;font-size:9px} .modal-head h2{margin:5px 0 0;font-size:24px}
 .close{width:42px;height:42px;border-radius:11px;border:1px solid var(--line);background:#0a1720;color:#fff;font-size:23px;cursor:pointer}
 .close:hover{border-color:var(--accent)}
 .tools{display:flex;gap:10px;padding:15px 23px;border-bottom:1px solid rgba(255,255,255,.06)}
 .search{flex:1;max-width:480px;border:1px solid var(--line);background:#08141d;color:#fff;border-radius:11px;padding:12px 14px;outline:none}
-.search:focus{border-color:var(--accent)}
-.count{margin-left:auto;align-self:center;color:var(--muted);font-size:11px}
+.search:focus{border-color:var(--accent)} .count{margin-left:auto;align-self:center;color:var(--muted);font-size:11px}
 .dev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;padding:20px 23px 26px}
 .dev-card{display:grid;grid-template-columns:190px 1fr;min-height:230px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:linear-gradient(145deg,#10212e,#0a161f);transition:.2s}
-.dev-card:hover{transform:translateY(-2px);border-color:#3e6c86}
-.dev-card.hidden{display:none}
-.dev-visual{position:relative;min-height:100%;display:flex;align-items:flex-end;padding:15px;overflow:hidden;background:linear-gradient(145deg,#18364a,#091621)}
-.dev-visual:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:22px 22px;transform:perspective(250px) rotateX(50deg) scale(1.6);opacity:.5}
-.dev-visual:after{content:"";position:absolute;width:115px;height:115px;border:1px solid rgba(67,201,255,.45);border-radius:50%;left:34px;top:38px;box-shadow:0 0 45px rgba(67,201,255,.2)}
-.dev-visual>span{position:relative;z-index:1;color:#dff6ff;font-size:10px;letter-spacing:.14em}
-.photo-placeholder{position:absolute;z-index:2;inset:12px 12px auto 12px;height:94px;border:1px dashed rgba(255,255,255,.28);border-radius:12px;background:rgba(4,12,18,.46);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
-.photo-placeholder span{font-size:8px;letter-spacing:.13em;color:#a9bdc9}
-.photo-placeholder small{font-size:8px;color:#617b8b;margin-top:6px}
-.visual-02{background:linear-gradient(145deg,#163b36,#091a1a)}
-.visual-03{background:linear-gradient(145deg,#123b61,#081725)}
-.visual-04{background:linear-gradient(145deg,#50391b,#171108)}
-.visual-05{background:linear-gradient(145deg,#39274e,#130e1d)}
-.visual-06{background:linear-gradient(145deg,#4a2430,#190c11)}
-.visual-07{background:linear-gradient(145deg,#3e3920,#161407)}
-.dev-body{padding:18px;display:flex;flex-direction:column}
-.dev-num{color:var(--accent);font-size:10px;font-weight:800}
-.dev-body h3{font-size:15px;margin:8px 0;line-height:1.35}
-.dev-body p{font-size:11px;color:var(--muted);line-height:1.58;margin:0 0 12px}
-.dev-meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto}
-.dev-meta span{border:1px solid #274251;border-radius:999px;padding:5px 7px;font-size:8px;color:#9db3c2}
-.open-product{margin-top:14px;color:#dff7ff;text-decoration:none;font-size:10px;font-weight:700}
-.open-product b{color:var(--accent);margin-left:4px}
-.modal-foot{display:flex;justify-content:space-between;gap:18px;padding:18px 23px;border-top:1px solid var(--line);font-size:9px;color:#718998;letter-spacing:.09em;text-transform:uppercase}
-.modal-foot strong{color:var(--accent)}
+.dev-card:hover{transform:translateY(-2px);border-color:#3e6c86} .dev-card.hidden{display:none}
+.dev-visual{position:relative;min-height:100%;display:flex;align-items:flex-end;padding:15px;overflow:hidden;background:linear-gradient(145deg,#17364a,#07141d)}
+.dev-visual:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 72% 28%,rgba(67,201,255,.24),transparent 28%),linear-gradient(to top,rgba(4,11,16,.92),transparent 70%);z-index:1}
+.scan-grid{position:absolute;inset:-30%;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:22px 22px;transform:perspective(260px) rotateX(54deg);opacity:.55}
+.visual-orbit{position:absolute;width:125px;height:125px;border:1px solid rgba(105,220,255,.5);border-radius:50%;left:34px;top:35px;box-shadow:0 0 40px rgba(67,201,255,.18)}
+.visual-orbit:before,.visual-orbit:after{content:"";position:absolute;border:1px solid rgba(105,220,255,.28);border-radius:50%;inset:17px}
+.visual-orbit:after{inset:36px;box-shadow:0 0 18px rgba(67,201,255,.4)}
+.dev-visual>span{position:relative;z-index:2;color:#dff6ff;font-size:10px;letter-spacing:.14em}
+.photo-slot{position:absolute;inset:0;z-index:0;overflow:hidden}
+.project-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.photo-empty{position:absolute;inset:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px dashed rgba(174,222,244,.34);border-radius:12px;background:rgba(5,15,22,.46);color:#a9c0ce}
+.photo-empty span{font-size:8px;font-weight:700;letter-spacing:.13em}
+.photo-empty small{margin-top:7px;color:#678391;font-size:8px;letter-spacing:.03em}
+.photo-slot.loaded .project-photo{display:block}
+.photo-slot.loaded .photo-empty{display:none}
 
-@media(max-width:850px){
-  .dev-grid{grid-template-columns:1fr}
-}
-@media(max-width:600px){
-  .site{padding:0}
-  .site-nav{margin:0;border-radius:0 0 22px 22px;padding:20px 18px}
-  .logo{font-size:12px}
-  .menu button{font-size:11px;padding:12px 16px}
-  .hero{padding:115px 24px 80px}
-  .hero small{font-size:11px}
-  .hero h1{font-size:44px;line-height:1.08}
-  .hero p{font-size:17px}
-  .modal{padding:0}
-  .modal-shell{margin:0;min-height:100vh;border-radius:0}
-  .modal-head,.tools{padding-left:14px;padding-right:14px}
-  .dev-grid{padding:12px}
-  .dev-card{grid-template-columns:120px 1fr;min-height:218px}
-  .photo-placeholder{height:76px}
-  .modal-foot{display:block;line-height:1.9}
-}
+.visual-02{background:linear-gradient(145deg,#153c35,#081817)} .visual-03{background:linear-gradient(145deg,#123b61,#071522)} .visual-04{background:linear-gradient(145deg,#4b371d,#161006)} .visual-05{background:linear-gradient(145deg,#38274d,#120d1c)} .visual-06{background:linear-gradient(145deg,#48232f,#170b10)} .visual-07{background:linear-gradient(145deg,#3b3620,#141206)}
+.dev-body{padding:18px;display:flex;flex-direction:column} .dev-num{color:var(--accent);font-size:10px;font-weight:800} .dev-body h3{font-size:15px;margin:8px 0;line-height:1.35} .dev-body p{font-size:11px;color:var(--muted);line-height:1.58;margin:0 0 12px}
+.dev-meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto} .dev-meta span{border:1px solid #274251;border-radius:999px;padding:5px 7px;font-size:8px;color:#9db3c2}
+.open-product{margin-top:14px;color:#dff7ff;text-decoration:none;font-size:10px;font-weight:700} .open-product b{color:var(--accent);margin-left:4px}
+.modal-foot{display:flex;justify-content:space-between;gap:18px;padding:18px 23px;border-top:1px solid var(--line);font-size:9px;color:#718998;letter-spacing:.09em;text-transform:uppercase} .modal-foot strong{color:var(--accent)}
+/* Embedded application viewer: no external path required */
+.app-viewer{position:fixed;inset:0;z-index:2000;display:none;background:#050b10}
+.app-viewer.open{display:grid;grid-template-rows:auto 1fr}
+.app-viewer-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;padding:11px 14px;border-bottom:1px solid #213746;background:#07131c;color:#eaf3f8}
+.viewer-back,.viewer-close{border:1px solid #29495c;background:#0d2230;color:#fff;border-radius:9px;padding:9px 12px;cursor:pointer}
+.viewer-title{min-width:0;flex:1;font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.viewer-credit{flex:0 0 100%;white-space:nowrap}
+.app-frame{width:100%;height:100%;border:0;background:#071018}
+@media(max-width:850px){.dev-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.site{padding:0} .site-nav{margin:0;border-radius:0 0 22px 22px;padding:20px 18px} .logo{font-size:12px} .menu button{font-size:11px;padding:12px 16px} .hero{padding:115px 24px 80px} .hero small{font-size:11px} .hero h1{font-size:44px;line-height:1.08} .hero p{font-size:17px} .modal{padding:0} .modal-shell{margin:0;min-height:100vh;border-radius:0} .modal-head,.tools{padding-left:14px;padding-right:14px} .dev-grid{padding:12px} .dev-card{grid-template-columns:120px 1fr;min-height:218px} .modal-foot{display:block;line-height:1.9}}
 </style>
 </head>
 <body>
 <div class="site">
-  <header class="site-nav">
-    <div class="logo">ALIKHAN DZUEV</div>
-    <nav class="menu">
-      <button id="openDevelopments">Разработки</button>
-    </nav>
-  </header>
-
-  <section class="hero">
-    <small>ИНЖЕНЕРИЯ · СТРОИТЕЛЬСТВО ·<br>ЦИФРОВЫЕ СИСТЕМЫ</small>
-    <h1>Технологии, которые<br>видят объект<br>целиком</h1>
-    <p>Интеллектуальные системы мониторинга для строительства, промышленности и природно-техногенной безопасности.</p>
-    <button class="hero-btn" id="openDevelopments2">Посмотреть разработки</button>
-  </section>
-
-  <div class="credit-home">Intellectual concept & development — <strong>Alikhan Dzuev</strong></div>
+<header class="site-nav"><div class="logo-block"><div class="logo">ALIKHAN DZUEV</div><div class="top-credit">Developed by Alikhan Dzuev</div></div><nav class="menu"><button id="openDevelopments">Разработки</button></nav></header>
+<section class="hero"><small>ИНЖЕНЕРИЯ · СТРОИТЕЛЬСТВО ·<br>ЦИФРОВЫЕ СИСТЕМЫ</small><h1>Технологии, которые<br>видят объект<br>целиком</h1><p>Интеллектуальные системы мониторинга для строительства, промышленности и природно-техногенной безопасности.</p><button class="hero-btn" id="openDevelopments2">Посмотреть разработки</button></section>
+<div class="credit-home">Developed by <strong>Alikhan Dzuev</strong></div>
 </div>
-
-<div class="modal" id="developmentsModal" aria-hidden="true">
-  <div class="modal-shell">
-    <div class="modal-head">
-      <div><small>INTELLIGENT ENGINEERING PORTFOLIO</small><h2>Разработки</h2></div>
-      <button class="close" id="closeDevelopments" aria-label="Закрыть">×</button>
-    </div>
-    <div class="tools">
-      <input class="search" id="devSearch" placeholder="Поиск по разработкам">
-      <span class="count"><b id="visibleCount">7</b> проектов</span>
-    </div>
-    <div class="dev-grid">
+<div class="modal" id="developmentsModal" aria-hidden="true"><div class="modal-shell"><div class="modal-head"><div><div class="modal-credit">Developed by Alikhan Dzuev</div><small>ENGINEERING DEVELOPMENT PORTFOLIO</small><h2>Разработки</h2></div><button class="close" id="closeDevelopments" aria-label="Закрыть">×</button></div><div class="tools"><input class="search" id="devSearch" placeholder="Поиск по разработкам"><span class="count"><b id="visibleCount">7</b> проектов</span></div><div class="dev-grid">
     <article class="dev-card" data-search="умная охрана строительной площадки безопасность периметра, людей, техники, крановых и закрытых зон. site guard">
       <div class="dev-visual visual-01">
-        <span>SITE GUARD</span>
-        <div class="photo-placeholder">
-          <span>ПРЕЗЕНТАЦИОННОЕ ФОТО</span>
-          <small>images/project-01.jpg</small>
+        <div class="photo-slot" data-photo-base="images/project-01">
+          <img class="project-photo" alt="Фотография разработки 01">
+          <div class="photo-empty"><span>МЕСТО ДЛЯ ФОТОГРАФИИ</span><small>project-01.jpg / .png / .webp</small></div>
         </div>
+        <span>SITE GUARD</span>
       </div>
       <div class="dev-body">
         <div class="dev-num">01</div>
         <h3>Умная охрана строительной площадки</h3>
         <p>Безопасность периметра, людей, техники, крановых и закрытых зон.</p>
-        <div class="dev-meta"><span>Интерактивный MVP</span><span>AI + IoT</span></div>
-        <a class="open-product" href="developments/01_construction_guard.html">Открыть разработку <b>→</b></a>
+        <div class="dev-meta"><span>Опытный образец</span><span>Инженерная система</span></div>
+        <a class="open-product" href="01_construction_guard.html" data-app="app-01" data-title="Умная охрана строительной площадки">Открыть разработку <b>→</b></a>
       </div>
     </article>
     <article class="dev-card" data-search="контроль насосной или котельной вибрация, давление, температура, протечки и состояние оборудования. thermo pump">
       <div class="dev-visual visual-02">
-        <span>THERMO PUMP</span>
-        <div class="photo-placeholder">
-          <span>ПРЕЗЕНТАЦИОННОЕ ФОТО</span>
-          <small>images/project-02.jpg</small>
+        <div class="photo-slot" data-photo-base="images/project-02">
+          <img class="project-photo" alt="Фотография разработки 02">
+          <div class="photo-empty"><span>МЕСТО ДЛЯ ФОТОГРАФИИ</span><small>project-02.jpg / .png / .webp</small></div>
         </div>
+        <span>THERMO PUMP</span>
       </div>
       <div class="dev-body">
         <div class="dev-num">02</div>
         <h3>Контроль насосной или котельной</h3>
         <p>Вибрация, давление, температура, протечки и состояние оборудования.</p>
-        <div class="dev-meta"><span>Интерактивный MVP</span><span>AI + IoT</span></div>
-        <a class="open-product" href="developments/02_pump_boiler.html">Открыть разработку <b>→</b></a>
+        <div class="dev-meta"><span>Опытный образец</span><span>Инженерная система</span></div>
+        <a class="open-product" href="02_pump_boiler.html" data-app="app-02" data-title="Контроль насосной или котельной">Открыть разработку <b>→</b></a>
       </div>
     </article>
     <article class="dev-card" data-search="контроль плотины, водосброса или дамбы фильтрация, деформации, уровни воды и гидромеханическое оборудование. hydro guard">
       <div class="dev-visual visual-03">
-        <span>HYDRO GUARD</span>
-        <div class="photo-placeholder">
-          <span>ПРЕЗЕНТАЦИОННОЕ ФОТО</span>
-          <small>images/project-03.jpg</small>
+        <div class="photo-slot" data-photo-base="images/project-03">
+          <img class="project-photo" alt="Фотография разработки 03">
+          <div class="photo-empty"><span>МЕСТО ДЛЯ ФОТОГРАФИИ</span><small>project-03.jpg / .png / .webp</small></div>
         </div>
+        <span>HYDRO GUARD</span>
       </div>
       <div class="dev-body">
         <div class="dev-num">03</div>
         <h3>Контроль плотины, водосброса или дамбы</h3>
         <p>Фильтрация, деформации, уровни воды и гидромеханическое оборудование.</p>
-        <div class="dev-meta"><span>Интерактивный MVP</span><span>AI + IoT</span></div>
-        <a class="open-product" href="developments/03_dam_control.html">Открыть разработку <b>→</b></a>
+        <div class="dev-meta"><span>Опытный образец</span><span>Инженерная система</span></div>
+        <a class="open-product" href="03_dam_control.html" data-app="app-03" data-title="Контроль плотины, водосброса или дамбы">Открыть разработку <b>→</b></a>
       </div>
     </article>
     <article class="dev-card" data-search="контроль селевого русла осадки, уровни, виброакустика и последовательное подтверждение события. mudflow watch">
       <div class="dev-visual visual-04">
-        <span>MUDFLOW WATCH</span>
-        <div class="photo-placeholder">
-          <span>ПРЕЗЕНТАЦИОННОЕ ФОТО</span>
-          <small>images/project-04.jpg</small>
+        <div class="photo-slot" data-photo-base="images/project-04">
+          <img class="project-photo" alt="Фотография разработки 04">
+          <div class="photo-empty"><span>МЕСТО ДЛЯ ФОТОГРАФИИ</span><small>project-04.jpg / .png / .webp</small></div>
         </div>
+        <span>MUDFLOW WATCH</span>
       </div>
       <div class="dev-body">
         <div class="dev-num">04</div>
         <h3>Контроль селевого русла</h3>
         <p>Осадки, уровни, виброакустика и последовательное подтверждение события.</p>
-        <div class="dev-meta"><span>Интерактивный MVP</span><span>AI + IoT</span></div>
-        <a class="open-product" href="developments/04_debris_flow.html">Открыть разработку <b>→</b></a>
+        <div class="dev-meta"><span>Опытный образец</span><span>Инженерная система</span></div>
+        <a class="open-product" href="04_debris_flow.html" data-app="app-04" data-title="Контроль селевого русла">Открыть разработку <b>→</b></a>
       </div>
     </article>
     <article class="dev-card" data-search="контроль оползня смещения, ускорение, поровое давление, трещины и метеофакторы. slope guard">
       <div class="dev-visual visual-05">
-        <span>SLOPE GUARD</span>
-        <div class="photo-placeholder">
-          <span>ПРЕЗЕНТАЦИОННОЕ ФОТО</span>
-          <small>images/project-05.jpg</small>
+        <div class="photo-slot" data-photo-base="images/project-05">
+          <img class="project-photo" alt="Фотография разработки 05">
+          <div class="photo-empty"><span>МЕСТО ДЛЯ ФОТОГРАФИИ</span><small>project-05.jpg / .png / .webp</small></div>
         </div>
+        <span>SLOPE GUARD</span>
       </div>
       <div class="dev-body">
         <div class="dev-num">05</div>
         <h3>Контроль оползня</h3>
         <p>Смещения, ускорение, поровое давление, трещины и метеофакторы.</p>
-        <div class="dev-meta"><span>Интерактивный MVP</span><span>AI + IoT</span></div>
-        <a class="open-product" href="developments/05_landslide.html">Открыть разработку <b>→</b></a>
+        <div class="dev-meta"><span>Опытный образец</span><span>Инженерная система</span></div>
+        <a class="open-product" href="05_landslide.html" data-app="app-05" data-title="Контроль оползня">Открыть разработку <b>→</b></a>
       </div>
     </article>
     <article class="dev-card" data-search="контроль промышленной безопасности сиз, газовая среда, техника, персонал и опасные сближения. industry safe">
       <div class="dev-visual visual-06">
-        <span>INDUSTRY SAFE</span>
-        <div class="photo-placeholder">
-          <span>ПРЕЗЕНТАЦИОННОЕ ФОТО</span>
-          <small>images/project-06.jpg</small>
+        <div class="photo-slot" data-photo-base="images/project-06">
+          <img class="project-photo" alt="Фотография разработки 06">
+          <div class="photo-empty"><span>МЕСТО ДЛЯ ФОТОГРАФИИ</span><small>project-06.jpg / .png / .webp</small></div>
         </div>
+        <span>INDUSTRY SAFE</span>
       </div>
       <div class="dev-body">
         <div class="dev-num">06</div>
         <h3>Контроль промышленной безопасности</h3>
         <p>СИЗ, газовая среда, техника, персонал и опасные сближения.</p>
-        <div class="dev-meta"><span>Интерактивный MVP</span><span>AI + IoT</span></div>
-        <a class="open-product" href="developments/06_industrial_safety.html">Открыть разработку <b>→</b></a>
+        <div class="dev-meta"><span>Опытный образец</span><span>Инженерная система</span></div>
+        <a class="open-product" href="06_industrial_safety.html" data-app="app-06" data-title="Контроль промышленной безопасности">Открыть разработку <b>→</b></a>
       </div>
     </article>
     <article class="dev-card" data-search="«чёрный ящик объекта» единая временная линия видео, телеметрии, автоматики и действий персонала. object blackbox">
       <div class="dev-visual visual-07">
-        <span>OBJECT BLACKBOX</span>
-        <div class="photo-placeholder">
-          <span>ПРЕЗЕНТАЦИОННОЕ ФОТО</span>
-          <small>images/project-07.jpg</small>
+        <div class="photo-slot" data-photo-base="images/project-07">
+          <img class="project-photo" alt="Фотография разработки 07">
+          <div class="photo-empty"><span>МЕСТО ДЛЯ ФОТОГРАФИИ</span><small>project-07.jpg / .png / .webp</small></div>
         </div>
+        <span>OBJECT BLACKBOX</span>
       </div>
       <div class="dev-body">
         <div class="dev-num">07</div>
         <h3>«Чёрный ящик объекта»</h3>
         <p>Единая временная линия видео, телеметрии, автоматики и действий персонала.</p>
-        <div class="dev-meta"><span>Интерактивный MVP</span><span>AI + IoT</span></div>
-        <a class="open-product" href="developments/07_object_blackbox.html">Открыть разработку <b>→</b></a>
+        <div class="dev-meta"><span>Опытный образец</span><span>Инженерная система</span></div>
+        <a class="open-product" href="07_object_blackbox.html" data-app="app-07" data-title="«Чёрный ящик объекта»">Открыть разработку <b>→</b></a>
       </div>
-    </article></div>
-    <div class="modal-foot">
-      <span>Структура готова для добавления новых разработок</span>
-      <span><strong>INTELLECTUAL CONCEPT & DEVELOPMENT — ALIKHAN DZUEV</strong></span>
-    </div>
-  </div>
+    </article></div><div class="modal-foot"><span>Структура готова для добавления новых разработок</span><span><strong>Developed by Alikhan Dzuev</strong></span></div></div></div>
+<div class="app-viewer" id="appViewer" aria-hidden="true"><div class="app-viewer-head"><div class="viewer-credit">Developed by Alikhan Dzuev</div><button class="viewer-back" id="viewerBack">← К разработкам</button><div class="viewer-title" id="viewerTitle">Разработка</div><button class="viewer-close" id="viewerClose">×</button></div><iframe class="app-frame" id="appFrame" title="Разработка"></iframe></div>
+
+<template id="app-01"><!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Умная охрана строительной площадки</title>
+<style>
+:root{--accent:#00d4ff;--bg:#071018;--panel:#0d1924;--panel2:#101f2c;--line:#213545;--text:#e9f2f8;--muted:#87a0b3;--ok:#53e09a;--warn:#ffc857;--bad:#ff667d}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 75% 0,#10273a 0,#071018 34%,#050b10 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+button{font:inherit}.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.side{border-right:1px solid var(--line);background:rgba(5,12,18,.86);backdrop-filter:blur(14px);padding:22px 16px;position:sticky;top:0;height:100vh}
+.brand{display:flex;gap:12px;align-items:center;padding:4px 8px 24px}.logo{width:38px;height:38px;border:1px solid var(--accent);border-radius:11px;display:grid;place-items:center;box-shadow:0 0 28px color-mix(in srgb,var(--accent) 30%,transparent);font-weight:800;color:var(--accent)}.brand b{font-size:13px;letter-spacing:.12em}.brand small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+.nav button{width:100%;border:0;background:transparent;color:var(--muted);text-align:left;padding:12px 12px;border-radius:10px;margin:3px 0;cursor:pointer}.nav button.active,.nav button:hover{background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 14%,transparent),transparent);color:var(--text);box-shadow:inset 3px 0 var(--accent)}
+.sidefoot{position:absolute;bottom:18px;left:16px;right:16px;padding:13px;border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:11px}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);margin-right:7px}
+.main{padding:22px 24px 40px;overflow:hidden}.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}.developer-credit{margin:0 0 7px;color:var(--accent);font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}.title h1{font-size:23px;margin:0 0 5px}.title p{margin:0;color:var(--muted);font-size:13px}.topright{display:flex;gap:8px;align-items:center}.pill{border:1px solid var(--line);background:#0b1721;color:var(--muted);padding:8px 11px;border-radius:999px;font-size:11px}.pill strong{color:var(--text)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:13px}.card{background:linear-gradient(150deg,rgba(18,35,48,.95),rgba(9,20,29,.95));border:1px solid var(--line);border-radius:15px;padding:15px;box-shadow:0 16px 45px rgba(0,0,0,.2)}.metric{grid-column:span 3;min-height:105px}.metric small{color:var(--muted);font-size:11px}.metric .v{font-size:27px;font-weight:750;margin-top:18px;letter-spacing:-.03em}.metric .unit{font-size:11px;color:var(--accent);margin-left:5px}.metric:after{content:"";display:block;height:2px;background:linear-gradient(90deg,var(--accent),transparent);margin-top:13px}
+.map{grid-column:span 8;min-height:355px}.alerts{grid-column:span 4;min-height:355px}.sensors{grid-column:span 5}.chart{grid-column:span 7}.ai{grid-column:span 7}.logic{grid-column:span 5}
+.cardhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.cardhead b{font-size:13px}.cardhead span{font-size:10px;color:var(--muted)}
+.scheme{position:relative;height:292px;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#09141e,#11283a);border:1px solid #223b4e}
+.scheme:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:28px 28px}
+.route{position:absolute;left:7%;top:51%;width:84%;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);transform:rotate(-8deg);box-shadow:0 0 13px var(--accent)}.zone{position:absolute;width:110px;height:68px;border:1px dashed color-mix(in srgb,var(--accent) 65%,white);background:color-mix(in srgb,var(--accent) 8%,transparent);border-radius:50%}
+.node{position:absolute;width:13px;height:13px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 15%,transparent),0 0 20px var(--accent);animation:pulse 2s infinite}.node label{position:absolute;white-space:nowrap;left:17px;top:-4px;font-size:10px;color:#c8dae7}
+@keyframes pulse{50%{box-shadow:0 0 0 10px transparent,0 0 25px var(--accent)}}
+.alertrow,.sensorrow{display:grid;gap:8px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:11px}.alertrow{grid-template-columns:40px 1fr auto}.alertrow:last-child,.sensorrow:last-child{border:0}.alertrow time{color:var(--muted)}.sev{font-size:9px;padding:4px 6px;border-radius:999px;border:1px solid var(--line);height:max-content}.sev.high{color:var(--bad)}.sev.mid{color:var(--warn)}.sev.low{color:var(--muted)}
+.sensorrow{grid-template-columns:1.1fr 1.5fr auto}.sensorrow small{color:var(--muted)}.status{width:8px;height:8px;border-radius:50%;margin-top:4px}.status.ok{background:var(--ok)}.status.warn{background:var(--warn)}
+canvas{width:100%;height:210px;display:block}.aiBox{border-left:3px solid var(--accent);padding:12px 13px;background:color-mix(in srgb,var(--accent) 7%,transparent);border-radius:0 10px 10px 0;font-size:12px;line-height:1.55;color:#d8e5ed}.aiActions{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}.action{border:1px solid var(--line);background:#0b1721;color:var(--text);padding:8px 10px;border-radius:9px;font-size:10px;cursor:pointer}.action:hover{border-color:var(--accent)}
+.rule{display:flex;gap:9px;font-size:11px;line-height:1.4;padding:7px 0;color:#c7d6e0}.rule i{font-style:normal;color:var(--accent);font-weight:700}.view{display:none}.view.active{display:block}.notice{padding:14px;border:1px solid var(--line);border-radius:12px;background:#0a1620;color:var(--muted);font-size:12px;line-height:1.6}.science{margin-top:13px;color:var(--muted);font-size:11px;line-height:1.55}
+@media(max-width:900px){.app{grid-template-columns:1fr}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:12px}.brand{padding-bottom:10px}.nav{display:flex;overflow:auto;gap:4px}.nav button{width:auto;white-space:nowrap}.sidefoot{display:none}.main{padding:16px 12px 30px}.top{display:block}.topright{margin-top:12px;overflow:auto}.metric{grid-column:span 6}.map,.alerts,.sensors,.chart,.ai,.logic{grid-column:span 12}.title h1{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="brand"><div class="logo">SA</div><div><b>SITE-GUARD</b><small>ИНЖЕНЕРНАЯ СИСТЕМА</small></div></div>
+  <nav class="nav">
+    <button class="active" data-view="overview">Обзор</button>
+    <button data-view="sensors">Датчики</button>
+    <button data-view="events">События</button>
+    <button data-view="assistant">Умный ассистент</button>
+    <button data-view="model">Логика системы</button>
+  </nav>
+  <div class="sidefoot"><span class="dot"></span>Все ключевые узлы на связи<br><span id="clock"></span></div>
+</aside>
+<main class="main">
+<div class="top">
+ <div class="title"><div class="developer-credit">Developed by Alikhan Dzuev</div><h1>Умная охрана строительной площадки</h1><p>Безопасность, периметр, техника и контроль опасных зон</p></div>
+ <div class="topright"><div class="pill">Камер: <strong>12</strong></div><div class="pill">Датчиков: <strong>18</strong></div><div class="pill">Режим: <strong>Умеренный</strong></div></div>
 </div>
 
+<section class="view active" id="overview">
+<div class="grid">
+<div class="card metric"><small>Людей на объекте</small><div class="v">47<span class="unit">чел.</span></div></div><div class="card metric"><small>Техника в движении</small><div class="v">6<span class="unit">ед.</span></div></div><div class="card metric"><small>Открытые зоны</small><div class="v">2<span class="unit">из 14</span></div></div><div class="card metric"><small>Связь системы</small><div class="v">99.4<span class="unit">%</span></div></div>
+<div class="card map"><div class="cardhead"><b>Схема объекта и активные узлы</b><span>ЖИВАЯ МОДЕЛЬ</span></div><div class="scheme"><div class="route"></div><div class="zone" style="left:25%;top:22%"></div><div class="zone" style="right:14%;bottom:18%"></div><div class="node" style="left:12%;top:25%"><label>КПП</label></div><div class="node" style="left:31%;top:61%"><label>Кран №1</label></div><div class="node" style="left:47%;top:32%"><label>Склад</label></div><div class="node" style="left:63%;top:68%"><label>Блок А</label></div><div class="node" style="left:77%;top:22%"><label>Блок Б</label></div><div class="node" style="left:84%;top:55%"><label>Щитовая</label></div></div></div>
+<div class="card alerts"><div class="cardhead"><b>Последние события</b><span>АВТОКЛАССИФИКАЦИЯ</span></div><div class="alertrow"><time>11:42</time><div>Рабочий вошёл в зону работы крана<br><small style="color:var(--muted)">Камера C-07</small></div><span class="sev high">Высокий</span></div><div class="alertrow"><time>11:36</time><div>Открыты северные ворота вне графика<br><small style="color:var(--muted)">Ворота G-02</small></div><span class="sev mid">Средний</span></div><div class="alertrow"><time>11:18</time><div>Автосамосвал стоит в пожарном проезде 7 мин<br><small style="color:var(--muted)">Камера C-03</small></div><span class="sev mid">Средний</span></div></div>
+<div class="card sensors"><div class="cardhead"><b>Состояние подсистем</b><span>ТЕЛЕМЕТРИЯ</span></div><div class="sensorrow"><div>Периметр</div><small>Камеры + виртуальные линии</small><div style="display:flex;gap:8px;align-items:center"><span>12/12</span><i class="status ok"></i></div></div><div class="sensorrow"><div>Опасные зоны</div><small>Умная детекция людей/техники</small><div style="display:flex;gap:8px;align-items:center"><span>8 зон</span><i class="status warn"></i></div></div><div class="sensorrow"><div>Ворота</div><small>Контакты открытия + ANPR</small><div style="display:flex;gap:8px;align-items:center"><span>2/2</span><i class="status ok"></i></div></div><div class="sensorrow"><div>Пожарные посты</div><small>Дым/температура</small><div style="display:flex;gap:8px;align-items:center"><span>4/4</span><i class="status ok"></i></div></div><div class="sensorrow"><div>Электрощитовые</div><small>Дверь/температура/протечка</small><div style="display:flex;gap:8px;align-items:center"><span>3/3</span><i class="status ok"></i></div></div></div>
+<div class="card chart"><div class="cardhead"><b>Тренд ключевого параметра</b><span>ПОСЛЕДНИЕ 6 ЧАСОВ</span></div><canvas id="chart"></canvas></div>
+<div class="card ai"><div class="cardhead"><b>Умный ассистент: текущая оценка</b><span>РЕКОМЕНДАЦИЯ, НЕ АВТОРЕШЕНИЕ</span></div><div class="aiBox" id="aiText">На участке Б-2 зафиксировано пересечение траектории пешеходов и техники. Рекомендация: временно перенести пешеходный маршрут на 6 метров восточнее и добавить световой маяк у поворота. Основание: три близких сближения за последние 40 минут.</div><div class="aiActions"><button class="action" onclick="explain()">Объяснить проще</button><button class="action" onclick="makeTask()">Создать задачу</button><button class="action" onclick="buildReport()">Сформировать отчёт</button></div></div>
+<div class="card logic"><div class="cardhead"><b>Активные правила корреляции</b><span>5 СЦЕНАРИЕВ</span></div><div class="rule"><i>↳</i><span>Человек + активная зона крана → критическая тревога</span></div><div class="rule"><i>↳</i><span>Техника + пешеход в одном коридоре → предупреждение</span></div><div class="rule"><i>↳</i><span>Открытие ворот вне графика + неизвестный номер → тревога</span></div><div class="rule"><i>↳</i><span>Дым/температура + визуальный признак → подтверждённый пожарный инцидент</span></div><div class="rule"><i>↳</i><span>Потеря камеры > 30 сек → техническая тревога</span></div></div>
+</div>
+</section>
+
+<section class="view" id="sensors"><div class="notice"><b>Датчики и каналы.</b><br><br>Этот экран в боевой версии содержит паспорт каждого прибора: тип, серийный номер, координаты, дату поверки, диапазон, качество сигнала, питание, историю отказов и график. Структура уже заложена, а текущие показатели представлены в режиме опытной эксплуатации.</div></section>
+<section class="view" id="events"><div class="notice"><b>Журнал событий.</b><br><br>Каждая тревога объединяет время, источники данных, кадр/видеофрагмент, значения до и после события, решение оператора и итоговый статус. Кнопки фильтрации и экспорт добавляются после подключения реальной базы данных.</div></section>
+<section class="view" id="assistant"><div class="notice"><b>Умный ассистент.</b><br><br>Ассистент объясняет причину тревоги, показывает использованные сигналы, отделяет факт от предположения и предлагает проверяемый порядок действий. Он не должен самостоятельно объявлять эвакуацию или заменять ответственного инженера.</div></section>
+<section class="view" id="model"><div class="notice"><b>Научно-инженерная основа системы.</b><div class="science">Модель опирается на контроль опасных зон, разделение потоков людей и техники, обнаружение средств индивидуальной защиты и проверку исправности самой системы.</div><br>Архитектура: камеры и приборы → шлюз протоколов → база временных рядов → движок правил → видеоархив → интерфейс → уведомления. Все пороги опытного образца являются предварительными; на реальном объекте они задаются проектом мониторинга и калибруются специалистами.</div></section>
+</main>
+</div>
 <script>
+const accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(b.dataset.view).classList.add('active')});
+function tick(){document.getElementById('clock').textContent=new Date().toLocaleString('ru-RU');}
+tick();setInterval(tick,1000);
+const canvas=document.getElementById('chart'),ctx=canvas.getContext('2d');
+function draw(){
+ const dpr=devicePixelRatio||1,w=canvas.clientWidth,h=canvas.clientHeight;canvas.width=w*dpr;canvas.height=h*dpr;ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);
+ ctx.strokeStyle='rgba(255,255,255,.07)';ctx.lineWidth=1;for(let i=1;i<5;i++){ctx.beginPath();ctx.moveTo(0,h*i/5);ctx.lineTo(w,h*i/5);ctx.stroke()}
+ let pts=[];for(let i=0;i<40;i++)pts.push(h*.56+Math.sin(i/5)*18+(Math.random()-.5)*9-i*.25);
+ ctx.strokeStyle=accent;ctx.lineWidth=2;ctx.beginPath();pts.forEach((y,i)=>{let x=i*w/(pts.length-1);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();
+ ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.closePath();let g=ctx.createLinearGradient(0,0,0,h);g.addColorStop(0,accent+'55');g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fill()
+}
+draw();addEventListener('resize',draw);setInterval(draw,4500);
+const original=document.getElementById('aiText').textContent;
+function explain(){document.getElementById('aiText').textContent='Простыми словами: система заметила не одно случайное значение, а устойчивое сочетание признаков. Сначала нужно проверить оборудование и подтвердить событие независимым способом, затем действовать по регламенту.'}
+function makeTask(){alert('Задача создана и привязана к событию, данным и видео.')}
+function buildReport(){alert('Отчёт сформирован: графики, кадры и журнал решений подготовлены к выгрузке.')}
+setInterval(()=>{document.querySelectorAll('.metric .v').forEach((el,i)=>{if(i<3&&Math.random()>.65){el.style.opacity=.55;setTimeout(()=>el.style.opacity=1,180)}})},1800);
+</script>
+</body>
+</html></template>
+
+<template id="app-02"><!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Контроль насосной или котельной</title>
+<style>
+:root{--accent:#5ae6a8;--bg:#071018;--panel:#0d1924;--panel2:#101f2c;--line:#213545;--text:#e9f2f8;--muted:#87a0b3;--ok:#53e09a;--warn:#ffc857;--bad:#ff667d}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 75% 0,#10273a 0,#071018 34%,#050b10 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+button{font:inherit}.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.side{border-right:1px solid var(--line);background:rgba(5,12,18,.86);backdrop-filter:blur(14px);padding:22px 16px;position:sticky;top:0;height:100vh}
+.brand{display:flex;gap:12px;align-items:center;padding:4px 8px 24px}.logo{width:38px;height:38px;border:1px solid var(--accent);border-radius:11px;display:grid;place-items:center;box-shadow:0 0 28px color-mix(in srgb,var(--accent) 30%,transparent);font-weight:800;color:var(--accent)}.brand b{font-size:13px;letter-spacing:.12em}.brand small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+.nav button{width:100%;border:0;background:transparent;color:var(--muted);text-align:left;padding:12px 12px;border-radius:10px;margin:3px 0;cursor:pointer}.nav button.active,.nav button:hover{background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 14%,transparent),transparent);color:var(--text);box-shadow:inset 3px 0 var(--accent)}
+.sidefoot{position:absolute;bottom:18px;left:16px;right:16px;padding:13px;border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:11px}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);margin-right:7px}
+.main{padding:22px 24px 40px;overflow:hidden}.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}.developer-credit{margin:0 0 7px;color:var(--accent);font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}.title h1{font-size:23px;margin:0 0 5px}.title p{margin:0;color:var(--muted);font-size:13px}.topright{display:flex;gap:8px;align-items:center}.pill{border:1px solid var(--line);background:#0b1721;color:var(--muted);padding:8px 11px;border-radius:999px;font-size:11px}.pill strong{color:var(--text)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:13px}.card{background:linear-gradient(150deg,rgba(18,35,48,.95),rgba(9,20,29,.95));border:1px solid var(--line);border-radius:15px;padding:15px;box-shadow:0 16px 45px rgba(0,0,0,.2)}.metric{grid-column:span 3;min-height:105px}.metric small{color:var(--muted);font-size:11px}.metric .v{font-size:27px;font-weight:750;margin-top:18px;letter-spacing:-.03em}.metric .unit{font-size:11px;color:var(--accent);margin-left:5px}.metric:after{content:"";display:block;height:2px;background:linear-gradient(90deg,var(--accent),transparent);margin-top:13px}
+.map{grid-column:span 8;min-height:355px}.alerts{grid-column:span 4;min-height:355px}.sensors{grid-column:span 5}.chart{grid-column:span 7}.ai{grid-column:span 7}.logic{grid-column:span 5}
+.cardhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.cardhead b{font-size:13px}.cardhead span{font-size:10px;color:var(--muted)}
+.scheme{position:relative;height:292px;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#09141e,#11283a);border:1px solid #223b4e}
+.scheme:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:28px 28px}
+.route{position:absolute;left:7%;top:51%;width:84%;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);transform:rotate(-8deg);box-shadow:0 0 13px var(--accent)}.zone{position:absolute;width:110px;height:68px;border:1px dashed color-mix(in srgb,var(--accent) 65%,white);background:color-mix(in srgb,var(--accent) 8%,transparent);border-radius:50%}
+.node{position:absolute;width:13px;height:13px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 15%,transparent),0 0 20px var(--accent);animation:pulse 2s infinite}.node label{position:absolute;white-space:nowrap;left:17px;top:-4px;font-size:10px;color:#c8dae7}
+@keyframes pulse{50%{box-shadow:0 0 0 10px transparent,0 0 25px var(--accent)}}
+.alertrow,.sensorrow{display:grid;gap:8px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:11px}.alertrow{grid-template-columns:40px 1fr auto}.alertrow:last-child,.sensorrow:last-child{border:0}.alertrow time{color:var(--muted)}.sev{font-size:9px;padding:4px 6px;border-radius:999px;border:1px solid var(--line);height:max-content}.sev.high{color:var(--bad)}.sev.mid{color:var(--warn)}.sev.low{color:var(--muted)}
+.sensorrow{grid-template-columns:1.1fr 1.5fr auto}.sensorrow small{color:var(--muted)}.status{width:8px;height:8px;border-radius:50%;margin-top:4px}.status.ok{background:var(--ok)}.status.warn{background:var(--warn)}
+canvas{width:100%;height:210px;display:block}.aiBox{border-left:3px solid var(--accent);padding:12px 13px;background:color-mix(in srgb,var(--accent) 7%,transparent);border-radius:0 10px 10px 0;font-size:12px;line-height:1.55;color:#d8e5ed}.aiActions{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}.action{border:1px solid var(--line);background:#0b1721;color:var(--text);padding:8px 10px;border-radius:9px;font-size:10px;cursor:pointer}.action:hover{border-color:var(--accent)}
+.rule{display:flex;gap:9px;font-size:11px;line-height:1.4;padding:7px 0;color:#c7d6e0}.rule i{font-style:normal;color:var(--accent);font-weight:700}.view{display:none}.view.active{display:block}.notice{padding:14px;border:1px solid var(--line);border-radius:12px;background:#0a1620;color:var(--muted);font-size:12px;line-height:1.6}.science{margin-top:13px;color:var(--muted);font-size:11px;line-height:1.55}
+@media(max-width:900px){.app{grid-template-columns:1fr}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:12px}.brand{padding-bottom:10px}.nav{display:flex;overflow:auto;gap:4px}.nav button{width:auto;white-space:nowrap}.sidefoot{display:none}.main{padding:16px 12px 30px}.top{display:block}.topright{margin-top:12px;overflow:auto}.metric{grid-column:span 6}.map,.alerts,.sensors,.chart,.ai,.logic{grid-column:span 12}.title h1{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="brand"><div class="logo">SA</div><div><b>THERMO-PUMP</b><small>ИНЖЕНЕРНАЯ СИСТЕМА</small></div></div>
+  <nav class="nav">
+    <button class="active" data-view="overview">Обзор</button>
+    <button data-view="sensors">Датчики</button>
+    <button data-view="events">События</button>
+    <button data-view="assistant">Умный ассистент</button>
+    <button data-view="model">Логика системы</button>
+  </nav>
+  <div class="sidefoot"><span class="dot"></span>Все ключевые узлы на связи<br><span id="clock"></span></div>
+</aside>
+<main class="main">
+<div class="top">
+ <div class="title"><div class="developer-credit">Developed by Alikhan Dzuev</div><h1>Контроль насосной или котельной</h1><p>Параметры оборудования, протечки, перегрев и визуальное подтверждение</p></div>
+ <div class="topright"><div class="pill">Камер: <strong>6</strong></div><div class="pill">Датчиков: <strong>26</strong></div><div class="pill">Режим: <strong>Норма</strong></div></div>
+</div>
+
+<section class="view active" id="overview">
+<div class="grid">
+<div class="card metric"><small>Давление подачи</small><div class="v">4.8<span class="unit">бар</span></div></div><div class="card metric"><small>Температура подачи</small><div class="v">78.2<span class="unit">°C</span></div></div><div class="card metric"><small>Вибрация насоса №2</small><div class="v">3.1<span class="unit">мм/с</span></div></div><div class="card metric"><small>Энергоэффективность</small><div class="v">91<span class="unit">%</span></div></div>
+<div class="card map"><div class="cardhead"><b>Схема объекта и активные узлы</b><span>ЖИВАЯ МОДЕЛЬ</span></div><div class="scheme"><div class="route"></div><div class="zone" style="left:25%;top:22%"></div><div class="zone" style="right:14%;bottom:18%"></div><div class="node" style="left:12%;top:25%"><label>Насос 1</label></div><div class="node" style="left:31%;top:61%"><label>Насос 2</label></div><div class="node" style="left:47%;top:32%"><label>Котёл</label></div><div class="node" style="left:63%;top:68%"><label>Коллектор</label></div><div class="node" style="left:77%;top:22%"><label>Щит АСУ</label></div><div class="node" style="left:84%;top:55%"><label>Вход</label></div></div></div>
+<div class="card alerts"><div class="cardhead"><b>Последние события</b><span>АВТОКЛАССИФИКАЦИЯ</span></div><div class="alertrow"><time>11:40</time><div>Рост вибрации насоса №2 на 22%<br><small style="color:var(--muted)">Датчик V-02</small></div><span class="sev mid">Средний</span></div><div class="alertrow"><time>10:57</time><div>Кратковременное падение давления<br><small style="color:var(--muted)">Контур P-01</small></div><span class="sev low">Низкий</span></div><div class="alertrow"><time>09:21</time><div>Открытие шкафа автоматики<br><small style="color:var(--muted)">Контакт D-04</small></div><span class="sev low">Инфо</span></div></div>
+<div class="card sensors"><div class="cardhead"><b>Состояние подсистем</b><span>ТЕЛЕМЕТРИЯ</span></div><div class="sensorrow"><div>Насос №1</div><small>Давление/ток/вибрация</small><div style="display:flex;gap:8px;align-items:center"><span>Работа</span><i class="status ok"></i></div></div><div class="sensorrow"><div>Насос №2</div><small>Давление/ток/вибрация</small><div style="display:flex;gap:8px;align-items:center"><span>Внимание</span><i class="status warn"></i></div></div><div class="sensorrow"><div>Коллектор</div><small>Температура/давление</small><div style="display:flex;gap:8px;align-items:center"><span>Норма</span><i class="status ok"></i></div></div><div class="sensorrow"><div>Пол машинного зала</div><small>Протечка</small><div style="display:flex;gap:8px;align-items:center"><span>Сухо</span><i class="status ok"></i></div></div><div class="sensorrow"><div>Газовая зона</div><small>Газ/тяга/температура</small><div style="display:flex;gap:8px;align-items:center"><span>Норма</span><i class="status ok"></i></div></div></div>
+<div class="card chart"><div class="cardhead"><b>Тренд ключевого параметра</b><span>ПОСЛЕДНИЕ 6 ЧАСОВ</span></div><canvas id="chart"></canvas></div>
+<div class="card ai"><div class="cardhead"><b>Умный ассистент: текущая оценка</b><span>РЕКОМЕНДАЦИЯ, НЕ АВТОРЕШЕНИЕ</span></div><div class="aiBox" id="aiText">Насос №2 демонстрирует устойчивый рост вибрации при почти неизменном расходе. Это пока не авария. Рекомендовано проверить центровку и крепление в ближайшее сервисное окно; продолжать наблюдение за трендом 24 часа.</div><div class="aiActions"><button class="action" onclick="explain()">Объяснить проще</button><button class="action" onclick="makeTask()">Создать задачу</button><button class="action" onclick="buildReport()">Сформировать отчёт</button></div></div>
+<div class="card logic"><div class="cardhead"><b>Активные правила корреляции</b><span>5 СЦЕНАРИЕВ</span></div><div class="rule"><i>↳</i><span>Вибрация растёт + ток растёт + расход падает → вероятное механическое сопротивление</span></div><div class="rule"><i>↳</i><span>Протечка + падение давления → аварийная остановка контура</span></div><div class="rule"><i>↳</i><span>Газ + потеря тяги → критическая тревога и команда на безопасный останов</span></div><div class="rule"><i>↳</i><span>Температура подшипника выше порога → предиктивное обслуживание</span></div><div class="rule"><i>↳</i><span>Сигнал автоматики + видео двери → подтверждение доступа</span></div></div>
+</div>
+</section>
+
+<section class="view" id="sensors"><div class="notice"><b>Датчики и каналы.</b><br><br>Этот экран в боевой версии содержит паспорт каждого прибора: тип, серийный номер, координаты, дату поверки, диапазон, качество сигнала, питание, историю отказов и график. Структура уже заложена, а текущие показатели представлены в режиме опытной эксплуатации.</div></section>
+<section class="view" id="events"><div class="notice"><b>Журнал событий.</b><br><br>Каждая тревога объединяет время, источники данных, кадр/видеофрагмент, значения до и после события, решение оператора и итоговый статус. Кнопки фильтрации и экспорт добавляются после подключения реальной базы данных.</div></section>
+<section class="view" id="assistant"><div class="notice"><b>Умный ассистент.</b><br><br>Ассистент объясняет причину тревоги, показывает использованные сигналы, отделяет факт от предположения и предлагает проверяемый порядок действий. Он не должен самостоятельно объявлять эвакуацию или заменять ответственного инженера.</div></section>
+<section class="view" id="model"><div class="notice"><b>Научно-инженерная основа системы.</b><div class="science">Ключевой принцип — трендовый контроль: важна не только величина параметра, но и скорость его изменения, сочетание нескольких сигналов и подтверждение камерой.</div><br>Архитектура: камеры и приборы → шлюз протоколов → база временных рядов → движок правил → видеоархив → интерфейс → уведомления. Все пороги опытного образца являются предварительными; на реальном объекте они задаются проектом мониторинга и калибруются специалистами.</div></section>
+</main>
+</div>
+<script>
+const accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(b.dataset.view).classList.add('active')});
+function tick(){document.getElementById('clock').textContent=new Date().toLocaleString('ru-RU');}
+tick();setInterval(tick,1000);
+const canvas=document.getElementById('chart'),ctx=canvas.getContext('2d');
+function draw(){
+ const dpr=devicePixelRatio||1,w=canvas.clientWidth,h=canvas.clientHeight;canvas.width=w*dpr;canvas.height=h*dpr;ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);
+ ctx.strokeStyle='rgba(255,255,255,.07)';ctx.lineWidth=1;for(let i=1;i<5;i++){ctx.beginPath();ctx.moveTo(0,h*i/5);ctx.lineTo(w,h*i/5);ctx.stroke()}
+ let pts=[];for(let i=0;i<40;i++)pts.push(h*.56+Math.sin(i/5)*18+(Math.random()-.5)*9-i*.25);
+ ctx.strokeStyle=accent;ctx.lineWidth=2;ctx.beginPath();pts.forEach((y,i)=>{let x=i*w/(pts.length-1);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();
+ ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.closePath();let g=ctx.createLinearGradient(0,0,0,h);g.addColorStop(0,accent+'55');g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fill()
+}
+draw();addEventListener('resize',draw);setInterval(draw,4500);
+const original=document.getElementById('aiText').textContent;
+function explain(){document.getElementById('aiText').textContent='Простыми словами: система заметила не одно случайное значение, а устойчивое сочетание признаков. Сначала нужно проверить оборудование и подтвердить событие независимым способом, затем действовать по регламенту.'}
+function makeTask(){alert('Задача создана и привязана к событию, данным и видео.')}
+function buildReport(){alert('Отчёт сформирован: графики, кадры и журнал решений подготовлены к выгрузке.')}
+setInterval(()=>{document.querySelectorAll('.metric .v').forEach((el,i)=>{if(i<3&&Math.random()>.65){el.style.opacity=.55;setTimeout(()=>el.style.opacity=1,180)}})},1800);
+</script>
+</body>
+</html></template>
+
+<template id="app-03"><!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Контроль плотины, водосброса или дамбы</title>
+<style>
+:root{--accent:#4aa3ff;--bg:#071018;--panel:#0d1924;--panel2:#101f2c;--line:#213545;--text:#e9f2f8;--muted:#87a0b3;--ok:#53e09a;--warn:#ffc857;--bad:#ff667d}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 75% 0,#10273a 0,#071018 34%,#050b10 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+button{font:inherit}.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.side{border-right:1px solid var(--line);background:rgba(5,12,18,.86);backdrop-filter:blur(14px);padding:22px 16px;position:sticky;top:0;height:100vh}
+.brand{display:flex;gap:12px;align-items:center;padding:4px 8px 24px}.logo{width:38px;height:38px;border:1px solid var(--accent);border-radius:11px;display:grid;place-items:center;box-shadow:0 0 28px color-mix(in srgb,var(--accent) 30%,transparent);font-weight:800;color:var(--accent)}.brand b{font-size:13px;letter-spacing:.12em}.brand small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+.nav button{width:100%;border:0;background:transparent;color:var(--muted);text-align:left;padding:12px 12px;border-radius:10px;margin:3px 0;cursor:pointer}.nav button.active,.nav button:hover{background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 14%,transparent),transparent);color:var(--text);box-shadow:inset 3px 0 var(--accent)}
+.sidefoot{position:absolute;bottom:18px;left:16px;right:16px;padding:13px;border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:11px}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);margin-right:7px}
+.main{padding:22px 24px 40px;overflow:hidden}.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}.developer-credit{margin:0 0 7px;color:var(--accent);font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}.title h1{font-size:23px;margin:0 0 5px}.title p{margin:0;color:var(--muted);font-size:13px}.topright{display:flex;gap:8px;align-items:center}.pill{border:1px solid var(--line);background:#0b1721;color:var(--muted);padding:8px 11px;border-radius:999px;font-size:11px}.pill strong{color:var(--text)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:13px}.card{background:linear-gradient(150deg,rgba(18,35,48,.95),rgba(9,20,29,.95));border:1px solid var(--line);border-radius:15px;padding:15px;box-shadow:0 16px 45px rgba(0,0,0,.2)}.metric{grid-column:span 3;min-height:105px}.metric small{color:var(--muted);font-size:11px}.metric .v{font-size:27px;font-weight:750;margin-top:18px;letter-spacing:-.03em}.metric .unit{font-size:11px;color:var(--accent);margin-left:5px}.metric:after{content:"";display:block;height:2px;background:linear-gradient(90deg,var(--accent),transparent);margin-top:13px}
+.map{grid-column:span 8;min-height:355px}.alerts{grid-column:span 4;min-height:355px}.sensors{grid-column:span 5}.chart{grid-column:span 7}.ai{grid-column:span 7}.logic{grid-column:span 5}
+.cardhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.cardhead b{font-size:13px}.cardhead span{font-size:10px;color:var(--muted)}
+.scheme{position:relative;height:292px;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#09141e,#11283a);border:1px solid #223b4e}
+.scheme:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:28px 28px}
+.route{position:absolute;left:7%;top:51%;width:84%;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);transform:rotate(-8deg);box-shadow:0 0 13px var(--accent)}.zone{position:absolute;width:110px;height:68px;border:1px dashed color-mix(in srgb,var(--accent) 65%,white);background:color-mix(in srgb,var(--accent) 8%,transparent);border-radius:50%}
+.node{position:absolute;width:13px;height:13px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 15%,transparent),0 0 20px var(--accent);animation:pulse 2s infinite}.node label{position:absolute;white-space:nowrap;left:17px;top:-4px;font-size:10px;color:#c8dae7}
+@keyframes pulse{50%{box-shadow:0 0 0 10px transparent,0 0 25px var(--accent)}}
+.alertrow,.sensorrow{display:grid;gap:8px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:11px}.alertrow{grid-template-columns:40px 1fr auto}.alertrow:last-child,.sensorrow:last-child{border:0}.alertrow time{color:var(--muted)}.sev{font-size:9px;padding:4px 6px;border-radius:999px;border:1px solid var(--line);height:max-content}.sev.high{color:var(--bad)}.sev.mid{color:var(--warn)}.sev.low{color:var(--muted)}
+.sensorrow{grid-template-columns:1.1fr 1.5fr auto}.sensorrow small{color:var(--muted)}.status{width:8px;height:8px;border-radius:50%;margin-top:4px}.status.ok{background:var(--ok)}.status.warn{background:var(--warn)}
+canvas{width:100%;height:210px;display:block}.aiBox{border-left:3px solid var(--accent);padding:12px 13px;background:color-mix(in srgb,var(--accent) 7%,transparent);border-radius:0 10px 10px 0;font-size:12px;line-height:1.55;color:#d8e5ed}.aiActions{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}.action{border:1px solid var(--line);background:#0b1721;color:var(--text);padding:8px 10px;border-radius:9px;font-size:10px;cursor:pointer}.action:hover{border-color:var(--accent)}
+.rule{display:flex;gap:9px;font-size:11px;line-height:1.4;padding:7px 0;color:#c7d6e0}.rule i{font-style:normal;color:var(--accent);font-weight:700}.view{display:none}.view.active{display:block}.notice{padding:14px;border:1px solid var(--line);border-radius:12px;background:#0a1620;color:var(--muted);font-size:12px;line-height:1.6}.science{margin-top:13px;color:var(--muted);font-size:11px;line-height:1.55}
+@media(max-width:900px){.app{grid-template-columns:1fr}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:12px}.brand{padding-bottom:10px}.nav{display:flex;overflow:auto;gap:4px}.nav button{width:auto;white-space:nowrap}.sidefoot{display:none}.main{padding:16px 12px 30px}.top{display:block}.topright{margin-top:12px;overflow:auto}.metric{grid-column:span 6}.map,.alerts,.sensors,.chart,.ai,.logic{grid-column:span 12}.title h1{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="brand"><div class="logo">SA</div><div><b>HYDRO-GUARD</b><small>ИНЖЕНЕРНАЯ СИСТЕМА</small></div></div>
+  <nav class="nav">
+    <button class="active" data-view="overview">Обзор</button>
+    <button data-view="sensors">Датчики</button>
+    <button data-view="events">События</button>
+    <button data-view="assistant">Умный ассистент</button>
+    <button data-view="model">Логика системы</button>
+  </nav>
+  <div class="sidefoot"><span class="dot"></span>Все ключевые узлы на связи<br><span id="clock"></span></div>
+</aside>
+<main class="main">
+<div class="top">
+ <div class="title"><div class="developer-credit">Developed by Alikhan Dzuev</div><h1>Контроль плотины, водосброса или дамбы</h1><p>Фильтрация, деформации, уровень воды, водосброс и состояние сооружения</p></div>
+ <div class="topright"><div class="pill">Камер: <strong>16</strong></div><div class="pill">Датчиков: <strong>42</strong></div><div class="pill">Режим: <strong>Повышенное внимание</strong></div></div>
+</div>
+
+<section class="view active" id="overview">
+<div class="grid">
+<div class="card metric"><small>Уровень верхнего бьефа</small><div class="v">1248.36<span class="unit">м</span></div></div><div class="card metric"><small>Фильтрационный расход</small><div class="v">18.4<span class="unit">л/с</span></div></div><div class="card metric"><small>Осадка гребня</small><div class="v">2.6<span class="unit">мм</span></div></div><div class="card metric"><small>Положение затвора</small><div class="v">38<span class="unit">%</span></div></div>
+<div class="card map"><div class="cardhead"><b>Схема объекта и активные узлы</b><span>ЖИВАЯ МОДЕЛЬ</span></div><div class="scheme"><div class="route"></div><div class="zone" style="left:25%;top:22%"></div><div class="zone" style="right:14%;bottom:18%"></div><div class="node" style="left:12%;top:25%"><label>Верхний бьеф</label></div><div class="node" style="left:31%;top:61%"><label>Гребень</label></div><div class="node" style="left:47%;top:32%"><label>Пьезометры</label></div><div class="node" style="left:63%;top:68%"><label>Дренаж</label></div><div class="node" style="left:77%;top:22%"><label>Затвор</label></div><div class="node" style="left:84%;top:55%"><label>Нижний бьеф</label></div></div></div>
+<div class="card alerts"><div class="cardhead"><b>Последние события</b><span>АВТОКЛАССИФИКАЦИЯ</span></div><div class="alertrow"><time>11:38</time><div>Фильтрационный расход выше фонового коридора<br><small style="color:var(--muted)">Дренаж D-03</small></div><span class="sev high">Высокий</span></div><div class="alertrow"><time>11:22</time><div>Рост уровня верхнего бьефа 3.4 см/ч<br><small style="color:var(--muted)">Уровнемер L-01</small></div><span class="sev mid">Средний</span></div><div class="alertrow"><time>08:14</time><div>Камера C-12: частичное загрязнение объектива<br><small style="color:var(--muted)">Камера C-12</small></div><span class="sev mid">Технический</span></div></div>
+<div class="card sensors"><div class="cardhead"><b>Состояние подсистем</b><span>ТЕЛЕМЕТРИЯ</span></div><div class="sensorrow"><div>Верхний бьеф</div><small>Радарный уровнемер</small><div style="display:flex;gap:8px;align-items:center"><span>1248.36 м</span><i class="status warn"></i></div></div><div class="sensorrow"><div>Тело дамбы</div><small>Пьезометры</small><div style="display:flex;gap:8px;align-items:center"><span>12/12</span><i class="status ok"></i></div></div><div class="sensorrow"><div>Гребень</div><small>GNSS/инклинометры</small><div style="display:flex;gap:8px;align-items:center"><span>6/6</span><i class="status ok"></i></div></div><div class="sensorrow"><div>Дренаж</div><small>Расходомеры</small><div style="display:flex;gap:8px;align-items:center"><span>18.4 л/с</span><i class="status warn"></i></div></div><div class="sensorrow"><div>Водосброс</div><small>Затвор/вибрация/камера</small><div style="display:flex;gap:8px;align-items:center"><span>Норма</span><i class="status ok"></i></div></div></div>
+<div class="card chart"><div class="cardhead"><b>Тренд ключевого параметра</b><span>ПОСЛЕДНИЕ 6 ЧАСОВ</span></div><canvas id="chart"></canvas></div>
+<div class="card ai"><div class="cardhead"><b>Умный ассистент: текущая оценка</b><span>РЕКОМЕНДАЦИЯ, НЕ АВТОРЕШЕНИЕ</span></div><div class="aiBox" id="aiText">Фильтрационный расход на D-03 вышел за сезонный фон, но пьезометрические уровни стабильны. Вероятнее локальное изменение дренажного режима, а не развитие опасной фильтрации. Нужны повторный замер и визуальный осмотр выходного участка.</div><div class="aiActions"><button class="action" onclick="explain()">Объяснить проще</button><button class="action" onclick="makeTask()">Создать задачу</button><button class="action" onclick="buildReport()">Сформировать отчёт</button></div></div>
+<div class="card logic"><div class="cardhead"><b>Активные правила корреляции</b><span>5 СЦЕНАРИЕВ</span></div><div class="rule"><i>↳</i><span>Рост пьезометрического уровня + рост фильтрационного расхода → инженерная тревога</span></div><div class="rule"><i>↳</i><span>Смещение гребня + изменение температуры без компенсации → проверка деформации</span></div><div class="rule"><i>↳</i><span>Уровень выше режима + затвор не отвечает → критическая тревога</span></div><div class="rule"><i>↳</i><span>Камера видит засорение водосброса + падение расхода → оперативная заявка</span></div><div class="rule"><i>↳</i><span>Несогласованность двух датчиков → режим проверки, а не ложная авария</span></div></div>
+</div>
+</section>
+
+<section class="view" id="sensors"><div class="notice"><b>Датчики и каналы.</b><br><br>Этот экран в боевой версии содержит паспорт каждого прибора: тип, серийный номер, координаты, дату поверки, диапазон, качество сигнала, питание, историю отказов и график. Структура уже заложена, а текущие показатели представлены в режиме опытной эксплуатации.</div></section>
+<section class="view" id="events"><div class="notice"><b>Журнал событий.</b><br><br>Каждая тревога объединяет время, источники данных, кадр/видеофрагмент, значения до и после события, решение оператора и итоговый статус. Кнопки фильтрации и экспорт добавляются после подключения реальной базы данных.</div></section>
+<section class="view" id="assistant"><div class="notice"><b>Умный ассистент.</b><br><br>Ассистент объясняет причину тревоги, показывает использованные сигналы, отделяет факт от предположения и предлагает проверяемый порядок действий. Он не должен самостоятельно объявлять эвакуацию или заменять ответственного инженера.</div></section>
+<section class="view" id="model"><div class="notice"><b>Научно-инженерная основа системы.</b><div class="science">Мониторинг плотины строится на совместном анализе визуальных наблюдений и приборных данных: уровней, фильтрации, давления воды в основании, деформаций и работы гидромеханического оборудования.</div><br>Архитектура: камеры и приборы → шлюз протоколов → база временных рядов → движок правил → видеоархив → интерфейс → уведомления. Все пороги опытного образца являются предварительными; на реальном объекте они задаются проектом мониторинга и калибруются специалистами.</div></section>
+</main>
+</div>
+<script>
+const accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(b.dataset.view).classList.add('active')});
+function tick(){document.getElementById('clock').textContent=new Date().toLocaleString('ru-RU');}
+tick();setInterval(tick,1000);
+const canvas=document.getElementById('chart'),ctx=canvas.getContext('2d');
+function draw(){
+ const dpr=devicePixelRatio||1,w=canvas.clientWidth,h=canvas.clientHeight;canvas.width=w*dpr;canvas.height=h*dpr;ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);
+ ctx.strokeStyle='rgba(255,255,255,.07)';ctx.lineWidth=1;for(let i=1;i<5;i++){ctx.beginPath();ctx.moveTo(0,h*i/5);ctx.lineTo(w,h*i/5);ctx.stroke()}
+ let pts=[];for(let i=0;i<40;i++)pts.push(h*.56+Math.sin(i/5)*18+(Math.random()-.5)*9-i*.25);
+ ctx.strokeStyle=accent;ctx.lineWidth=2;ctx.beginPath();pts.forEach((y,i)=>{let x=i*w/(pts.length-1);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();
+ ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.closePath();let g=ctx.createLinearGradient(0,0,0,h);g.addColorStop(0,accent+'55');g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fill()
+}
+draw();addEventListener('resize',draw);setInterval(draw,4500);
+const original=document.getElementById('aiText').textContent;
+function explain(){document.getElementById('aiText').textContent='Простыми словами: система заметила не одно случайное значение, а устойчивое сочетание признаков. Сначала нужно проверить оборудование и подтвердить событие независимым способом, затем действовать по регламенту.'}
+function makeTask(){alert('Задача создана и привязана к событию, данным и видео.')}
+function buildReport(){alert('Отчёт сформирован: графики, кадры и журнал решений подготовлены к выгрузке.')}
+setInterval(()=>{document.querySelectorAll('.metric .v').forEach((el,i)=>{if(i<3&&Math.random()>.65){el.style.opacity=.55;setTimeout(()=>el.style.opacity=1,180)}})},1800);
+</script>
+</body>
+</html></template>
+
+<template id="app-04"><!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Контроль селевого русла</title>
+<style>
+:root{--accent:#ffb454;--bg:#071018;--panel:#0d1924;--panel2:#101f2c;--line:#213545;--text:#e9f2f8;--muted:#87a0b3;--ok:#53e09a;--warn:#ffc857;--bad:#ff667d}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 75% 0,#10273a 0,#071018 34%,#050b10 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+button{font:inherit}.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.side{border-right:1px solid var(--line);background:rgba(5,12,18,.86);backdrop-filter:blur(14px);padding:22px 16px;position:sticky;top:0;height:100vh}
+.brand{display:flex;gap:12px;align-items:center;padding:4px 8px 24px}.logo{width:38px;height:38px;border:1px solid var(--accent);border-radius:11px;display:grid;place-items:center;box-shadow:0 0 28px color-mix(in srgb,var(--accent) 30%,transparent);font-weight:800;color:var(--accent)}.brand b{font-size:13px;letter-spacing:.12em}.brand small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+.nav button{width:100%;border:0;background:transparent;color:var(--muted);text-align:left;padding:12px 12px;border-radius:10px;margin:3px 0;cursor:pointer}.nav button.active,.nav button:hover{background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 14%,transparent),transparent);color:var(--text);box-shadow:inset 3px 0 var(--accent)}
+.sidefoot{position:absolute;bottom:18px;left:16px;right:16px;padding:13px;border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:11px}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);margin-right:7px}
+.main{padding:22px 24px 40px;overflow:hidden}.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}.developer-credit{margin:0 0 7px;color:var(--accent);font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}.title h1{font-size:23px;margin:0 0 5px}.title p{margin:0;color:var(--muted);font-size:13px}.topright{display:flex;gap:8px;align-items:center}.pill{border:1px solid var(--line);background:#0b1721;color:var(--muted);padding:8px 11px;border-radius:999px;font-size:11px}.pill strong{color:var(--text)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:13px}.card{background:linear-gradient(150deg,rgba(18,35,48,.95),rgba(9,20,29,.95));border:1px solid var(--line);border-radius:15px;padding:15px;box-shadow:0 16px 45px rgba(0,0,0,.2)}.metric{grid-column:span 3;min-height:105px}.metric small{color:var(--muted);font-size:11px}.metric .v{font-size:27px;font-weight:750;margin-top:18px;letter-spacing:-.03em}.metric .unit{font-size:11px;color:var(--accent);margin-left:5px}.metric:after{content:"";display:block;height:2px;background:linear-gradient(90deg,var(--accent),transparent);margin-top:13px}
+.map{grid-column:span 8;min-height:355px}.alerts{grid-column:span 4;min-height:355px}.sensors{grid-column:span 5}.chart{grid-column:span 7}.ai{grid-column:span 7}.logic{grid-column:span 5}
+.cardhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.cardhead b{font-size:13px}.cardhead span{font-size:10px;color:var(--muted)}
+.scheme{position:relative;height:292px;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#09141e,#11283a);border:1px solid #223b4e}
+.scheme:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:28px 28px}
+.route{position:absolute;left:7%;top:51%;width:84%;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);transform:rotate(-8deg);box-shadow:0 0 13px var(--accent)}.zone{position:absolute;width:110px;height:68px;border:1px dashed color-mix(in srgb,var(--accent) 65%,white);background:color-mix(in srgb,var(--accent) 8%,transparent);border-radius:50%}
+.node{position:absolute;width:13px;height:13px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 15%,transparent),0 0 20px var(--accent);animation:pulse 2s infinite}.node label{position:absolute;white-space:nowrap;left:17px;top:-4px;font-size:10px;color:#c8dae7}
+@keyframes pulse{50%{box-shadow:0 0 0 10px transparent,0 0 25px var(--accent)}}
+.alertrow,.sensorrow{display:grid;gap:8px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:11px}.alertrow{grid-template-columns:40px 1fr auto}.alertrow:last-child,.sensorrow:last-child{border:0}.alertrow time{color:var(--muted)}.sev{font-size:9px;padding:4px 6px;border-radius:999px;border:1px solid var(--line);height:max-content}.sev.high{color:var(--bad)}.sev.mid{color:var(--warn)}.sev.low{color:var(--muted)}
+.sensorrow{grid-template-columns:1.1fr 1.5fr auto}.sensorrow small{color:var(--muted)}.status{width:8px;height:8px;border-radius:50%;margin-top:4px}.status.ok{background:var(--ok)}.status.warn{background:var(--warn)}
+canvas{width:100%;height:210px;display:block}.aiBox{border-left:3px solid var(--accent);padding:12px 13px;background:color-mix(in srgb,var(--accent) 7%,transparent);border-radius:0 10px 10px 0;font-size:12px;line-height:1.55;color:#d8e5ed}.aiActions{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}.action{border:1px solid var(--line);background:#0b1721;color:var(--text);padding:8px 10px;border-radius:9px;font-size:10px;cursor:pointer}.action:hover{border-color:var(--accent)}
+.rule{display:flex;gap:9px;font-size:11px;line-height:1.4;padding:7px 0;color:#c7d6e0}.rule i{font-style:normal;color:var(--accent);font-weight:700}.view{display:none}.view.active{display:block}.notice{padding:14px;border:1px solid var(--line);border-radius:12px;background:#0a1620;color:var(--muted);font-size:12px;line-height:1.6}.science{margin-top:13px;color:var(--muted);font-size:11px;line-height:1.55}
+@media(max-width:900px){.app{grid-template-columns:1fr}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:12px}.brand{padding-bottom:10px}.nav{display:flex;overflow:auto;gap:4px}.nav button{width:auto;white-space:nowrap}.sidefoot{display:none}.main{padding:16px 12px 30px}.top{display:block}.topright{margin-top:12px;overflow:auto}.metric{grid-column:span 6}.map,.alerts,.sensors,.chart,.ai,.logic{grid-column:span 12}.title h1{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="brand"><div class="logo">SA</div><div><b>MUDFLOW-WATCH</b><small>ИНЖЕНЕРНАЯ СИСТЕМА</small></div></div>
+  <nav class="nav">
+    <button class="active" data-view="overview">Обзор</button>
+    <button data-view="sensors">Датчики</button>
+    <button data-view="events">События</button>
+    <button data-view="assistant">Умный ассистент</button>
+    <button data-view="model">Логика системы</button>
+  </nav>
+  <div class="sidefoot"><span class="dot"></span>Все ключевые узлы на связи<br><span id="clock"></span></div>
+</aside>
+<main class="main">
+<div class="top">
+ <div class="title"><div class="developer-credit">Developed by Alikhan Dzuev</div><h1>Контроль селевого русла</h1><p>Осадки, уровень, виброакустика, движение массы и каскадное подтверждение</p></div>
+ <div class="topright"><div class="pill">Камер: <strong>10</strong></div><div class="pill">Датчиков: <strong>24</strong></div><div class="pill">Режим: <strong>Жёлтый уровень</strong></div></div>
+</div>
+
+<section class="view active" id="overview">
+<div class="grid">
+<div class="card metric"><small>Осадки за 1 час</small><div class="v">18.6<span class="unit">мм</span></div></div><div class="card metric"><small>Уровень в створе 2</small><div class="v">0.74<span class="unit">м</span></div></div><div class="card metric"><small>Виброиндекс</small><div class="v">0.31<span class="unit">g</span></div></div><div class="card metric"><small>Время связи</small><div class="v">12<span class="unit">сек</span></div></div>
+<div class="card map"><div class="cardhead"><b>Схема объекта и активные узлы</b><span>ЖИВАЯ МОДЕЛЬ</span></div><div class="scheme"><div class="route"></div><div class="zone" style="left:25%;top:22%"></div><div class="zone" style="right:14%;bottom:18%"></div><div class="node" style="left:12%;top:25%"><label>Метеопост</label></div><div class="node" style="left:31%;top:61%"><label>Створ 1</label></div><div class="node" style="left:47%;top:32%"><label>Створ 2</label></div><div class="node" style="left:63%;top:68%"><label>Ущелье</label></div><div class="node" style="left:77%;top:22%"><label>Створ 3</label></div><div class="node" style="left:84%;top:55%"><label>Населённый пункт</label></div></div></div>
+<div class="card alerts"><div class="cardhead"><b>Последние события</b><span>АВТОКЛАССИФИКАЦИЯ</span></div><div class="alertrow"><time>11:41</time><div>Интенсивность осадков превысила предварительный порог<br><small style="color:var(--muted)">Метеопост M-01</small></div><span class="sev high">Высокий</span></div><div class="alertrow"><time>11:39</time><div>Ускорение роста уровня в створе 2<br><small style="color:var(--muted)">Уровень L-02</small></div><span class="sev mid">Средний</span></div><div class="alertrow"><time>10:50</time><div>Краткий виброимпульс без визуального подтверждения<br><small style="color:var(--muted)">Геофон G-01</small></div><span class="sev low">Низкий</span></div></div>
+<div class="card sensors"><div class="cardhead"><b>Состояние подсистем</b><span>ТЕЛЕМЕТРИЯ</span></div><div class="sensorrow"><div>Верхний створ</div><small>Осадки/камера/уровень</small><div style="display:flex;gap:8px;align-items:center"><span>Наблюдение</span><i class="status warn"></i></div></div><div class="sensorrow"><div>Средний створ</div><small>Виброакустика/камера</small><div style="display:flex;gap:8px;align-items:center"><span>Норма</span><i class="status ok"></i></div></div><div class="sensorrow"><div>Узкий участок</div><small>Уровень/скорость</small><div style="display:flex;gap:8px;align-items:center"><span>0.74 м</span><i class="status warn"></i></div></div><div class="sensorrow"><div>Нижний створ</div><small>Камера/радар</small><div style="display:flex;gap:8px;align-items:center"><span>Норма</span><i class="status ok"></i></div></div><div class="sensorrow"><div>Метеопост</div><small>Осадки/температура</small><div style="display:flex;gap:8px;align-items:center"><span>18.6 мм/ч</span><i class="status warn"></i></div></div></div>
+<div class="card chart"><div class="cardhead"><b>Тренд ключевого параметра</b><span>ПОСЛЕДНИЕ 6 ЧАСОВ</span></div><canvas id="chart"></canvas></div>
+<div class="card ai"><div class="cardhead"><b>Умный ассистент: текущая оценка</b><span>РЕКОМЕНДАЦИЯ, НЕ АВТОРЕШЕНИЕ</span></div><div class="aiBox" id="aiText">Сейчас есть гидрометеорологические предпосылки, но нет подтверждённого движения селевой массы. Рекомендация: повысить частоту опроса датчиков до 10 секунд, открыть полный видеопоток верхнего и среднего створов и уведомить дежурного специалиста.</div><div class="aiActions"><button class="action" onclick="explain()">Объяснить проще</button><button class="action" onclick="makeTask()">Создать задачу</button><button class="action" onclick="buildReport()">Сформировать отчёт</button></div></div>
+<div class="card logic"><div class="cardhead"><b>Активные правила корреляции</b><span>5 СЦЕНАРИЕВ</span></div><div class="rule"><i>↳</i><span>Осадки выше порога + быстрый рост уровня → готовность оператора</span></div><div class="rule"><i>↳</i><span>Виброакустический импульс + движение массы в кадре → подтверждённое событие</span></div><div class="rule"><i>↳</i><span>Событие в верхнем створе → автоматическое открытие камер ниже по руслу</span></div><div class="rule"><i>↳</i><span>Потеря двух каналов связи → переход на резервную телеметрию</span></div><div class="rule"><i>↳</i><span>Порог меняется по сезону и калибруется по реальным наблюдениям</span></div></div>
+</div>
+</section>
+
+<section class="view" id="sensors"><div class="notice"><b>Датчики и каналы.</b><br><br>Этот экран в боевой версии содержит паспорт каждого прибора: тип, серийный номер, координаты, дату поверки, диапазон, качество сигнала, питание, историю отказов и график. Структура уже заложена, а текущие показатели представлены в режиме опытной эксплуатации.</div></section>
+<section class="view" id="events"><div class="notice"><b>Журнал событий.</b><br><br>Каждая тревога объединяет время, источники данных, кадр/видеофрагмент, значения до и после события, решение оператора и итоговый статус. Кнопки фильтрации и экспорт добавляются после подключения реальной базы данных.</div></section>
+<section class="view" id="assistant"><div class="notice"><b>Умный ассистент.</b><br><br>Ассистент объясняет причину тревоги, показывает использованные сигналы, отделяет факт от предположения и предлагает проверяемый порядок действий. Он не должен самостоятельно объявлять эвакуацию или заменять ответственного инженера.</div></section>
+<section class="view" id="model"><div class="notice"><b>Научно-инженерная основа системы.</b><div class="science">Надёжный сценарий раннего обнаружения не строится по одному дождемеру. Нужна комбинация интенсивности и длительности осадков, уровня воды, виброакустики, видеоподтверждения и заранее отработанного регламента оповещения.</div><br>Архитектура: камеры и приборы → шлюз протоколов → база временных рядов → движок правил → видеоархив → интерфейс → уведомления. Все пороги опытного образца являются предварительными; на реальном объекте они задаются проектом мониторинга и калибруются специалистами.</div></section>
+</main>
+</div>
+<script>
+const accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(b.dataset.view).classList.add('active')});
+function tick(){document.getElementById('clock').textContent=new Date().toLocaleString('ru-RU');}
+tick();setInterval(tick,1000);
+const canvas=document.getElementById('chart'),ctx=canvas.getContext('2d');
+function draw(){
+ const dpr=devicePixelRatio||1,w=canvas.clientWidth,h=canvas.clientHeight;canvas.width=w*dpr;canvas.height=h*dpr;ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);
+ ctx.strokeStyle='rgba(255,255,255,.07)';ctx.lineWidth=1;for(let i=1;i<5;i++){ctx.beginPath();ctx.moveTo(0,h*i/5);ctx.lineTo(w,h*i/5);ctx.stroke()}
+ let pts=[];for(let i=0;i<40;i++)pts.push(h*.56+Math.sin(i/5)*18+(Math.random()-.5)*9-i*.25);
+ ctx.strokeStyle=accent;ctx.lineWidth=2;ctx.beginPath();pts.forEach((y,i)=>{let x=i*w/(pts.length-1);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();
+ ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.closePath();let g=ctx.createLinearGradient(0,0,0,h);g.addColorStop(0,accent+'55');g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fill()
+}
+draw();addEventListener('resize',draw);setInterval(draw,4500);
+const original=document.getElementById('aiText').textContent;
+function explain(){document.getElementById('aiText').textContent='Простыми словами: система заметила не одно случайное значение, а устойчивое сочетание признаков. Сначала нужно проверить оборудование и подтвердить событие независимым способом, затем действовать по регламенту.'}
+function makeTask(){alert('Задача создана и привязана к событию, данным и видео.')}
+function buildReport(){alert('Отчёт сформирован: графики, кадры и журнал решений подготовлены к выгрузке.')}
+setInterval(()=>{document.querySelectorAll('.metric .v').forEach((el,i)=>{if(i<3&&Math.random()>.65){el.style.opacity=.55;setTimeout(()=>el.style.opacity=1,180)}})},1800);
+</script>
+</body>
+</html></template>
+
+<template id="app-05"><!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Контроль оползня</title>
+<style>
+:root{--accent:#c88cff;--bg:#071018;--panel:#0d1924;--panel2:#101f2c;--line:#213545;--text:#e9f2f8;--muted:#87a0b3;--ok:#53e09a;--warn:#ffc857;--bad:#ff667d}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 75% 0,#10273a 0,#071018 34%,#050b10 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+button{font:inherit}.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.side{border-right:1px solid var(--line);background:rgba(5,12,18,.86);backdrop-filter:blur(14px);padding:22px 16px;position:sticky;top:0;height:100vh}
+.brand{display:flex;gap:12px;align-items:center;padding:4px 8px 24px}.logo{width:38px;height:38px;border:1px solid var(--accent);border-radius:11px;display:grid;place-items:center;box-shadow:0 0 28px color-mix(in srgb,var(--accent) 30%,transparent);font-weight:800;color:var(--accent)}.brand b{font-size:13px;letter-spacing:.12em}.brand small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+.nav button{width:100%;border:0;background:transparent;color:var(--muted);text-align:left;padding:12px 12px;border-radius:10px;margin:3px 0;cursor:pointer}.nav button.active,.nav button:hover{background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 14%,transparent),transparent);color:var(--text);box-shadow:inset 3px 0 var(--accent)}
+.sidefoot{position:absolute;bottom:18px;left:16px;right:16px;padding:13px;border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:11px}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);margin-right:7px}
+.main{padding:22px 24px 40px;overflow:hidden}.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}.developer-credit{margin:0 0 7px;color:var(--accent);font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}.title h1{font-size:23px;margin:0 0 5px}.title p{margin:0;color:var(--muted);font-size:13px}.topright{display:flex;gap:8px;align-items:center}.pill{border:1px solid var(--line);background:#0b1721;color:var(--muted);padding:8px 11px;border-radius:999px;font-size:11px}.pill strong{color:var(--text)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:13px}.card{background:linear-gradient(150deg,rgba(18,35,48,.95),rgba(9,20,29,.95));border:1px solid var(--line);border-radius:15px;padding:15px;box-shadow:0 16px 45px rgba(0,0,0,.2)}.metric{grid-column:span 3;min-height:105px}.metric small{color:var(--muted);font-size:11px}.metric .v{font-size:27px;font-weight:750;margin-top:18px;letter-spacing:-.03em}.metric .unit{font-size:11px;color:var(--accent);margin-left:5px}.metric:after{content:"";display:block;height:2px;background:linear-gradient(90deg,var(--accent),transparent);margin-top:13px}
+.map{grid-column:span 8;min-height:355px}.alerts{grid-column:span 4;min-height:355px}.sensors{grid-column:span 5}.chart{grid-column:span 7}.ai{grid-column:span 7}.logic{grid-column:span 5}
+.cardhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.cardhead b{font-size:13px}.cardhead span{font-size:10px;color:var(--muted)}
+.scheme{position:relative;height:292px;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#09141e,#11283a);border:1px solid #223b4e}
+.scheme:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:28px 28px}
+.route{position:absolute;left:7%;top:51%;width:84%;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);transform:rotate(-8deg);box-shadow:0 0 13px var(--accent)}.zone{position:absolute;width:110px;height:68px;border:1px dashed color-mix(in srgb,var(--accent) 65%,white);background:color-mix(in srgb,var(--accent) 8%,transparent);border-radius:50%}
+.node{position:absolute;width:13px;height:13px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 15%,transparent),0 0 20px var(--accent);animation:pulse 2s infinite}.node label{position:absolute;white-space:nowrap;left:17px;top:-4px;font-size:10px;color:#c8dae7}
+@keyframes pulse{50%{box-shadow:0 0 0 10px transparent,0 0 25px var(--accent)}}
+.alertrow,.sensorrow{display:grid;gap:8px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:11px}.alertrow{grid-template-columns:40px 1fr auto}.alertrow:last-child,.sensorrow:last-child{border:0}.alertrow time{color:var(--muted)}.sev{font-size:9px;padding:4px 6px;border-radius:999px;border:1px solid var(--line);height:max-content}.sev.high{color:var(--bad)}.sev.mid{color:var(--warn)}.sev.low{color:var(--muted)}
+.sensorrow{grid-template-columns:1.1fr 1.5fr auto}.sensorrow small{color:var(--muted)}.status{width:8px;height:8px;border-radius:50%;margin-top:4px}.status.ok{background:var(--ok)}.status.warn{background:var(--warn)}
+canvas{width:100%;height:210px;display:block}.aiBox{border-left:3px solid var(--accent);padding:12px 13px;background:color-mix(in srgb,var(--accent) 7%,transparent);border-radius:0 10px 10px 0;font-size:12px;line-height:1.55;color:#d8e5ed}.aiActions{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}.action{border:1px solid var(--line);background:#0b1721;color:var(--text);padding:8px 10px;border-radius:9px;font-size:10px;cursor:pointer}.action:hover{border-color:var(--accent)}
+.rule{display:flex;gap:9px;font-size:11px;line-height:1.4;padding:7px 0;color:#c7d6e0}.rule i{font-style:normal;color:var(--accent);font-weight:700}.view{display:none}.view.active{display:block}.notice{padding:14px;border:1px solid var(--line);border-radius:12px;background:#0a1620;color:var(--muted);font-size:12px;line-height:1.6}.science{margin-top:13px;color:var(--muted);font-size:11px;line-height:1.55}
+@media(max-width:900px){.app{grid-template-columns:1fr}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:12px}.brand{padding-bottom:10px}.nav{display:flex;overflow:auto;gap:4px}.nav button{width:auto;white-space:nowrap}.sidefoot{display:none}.main{padding:16px 12px 30px}.top{display:block}.topright{margin-top:12px;overflow:auto}.metric{grid-column:span 6}.map,.alerts,.sensors,.chart,.ai,.logic{grid-column:span 12}.title h1{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="brand"><div class="logo">SA</div><div><b>SLOPE-GUARD</b><small>ИНЖЕНЕРНАЯ СИСТЕМА</small></div></div>
+  <nav class="nav">
+    <button class="active" data-view="overview">Обзор</button>
+    <button data-view="sensors">Датчики</button>
+    <button data-view="events">События</button>
+    <button data-view="assistant">Умный ассистент</button>
+    <button data-view="model">Логика системы</button>
+  </nav>
+  <div class="sidefoot"><span class="dot"></span>Все ключевые узлы на связи<br><span id="clock"></span></div>
+</aside>
+<main class="main">
+<div class="top">
+ <div class="title"><div class="developer-credit">Developed by Alikhan Dzuev</div><h1>Контроль оползня</h1><p>Смещение, ускорение, поровое давление, осадки и контроль трещин</p></div>
+ <div class="topright"><div class="pill">Камер: <strong>8</strong></div><div class="pill">Датчиков: <strong>31</strong></div><div class="pill">Режим: <strong>Наблюдение</strong></div></div>
+</div>
+
+<section class="view active" id="overview">
+<div class="grid">
+<div class="card metric"><small>Смещение за сутки</small><div class="v">1.8<span class="unit">мм</span></div></div><div class="card metric"><small>Скорость смещения</small><div class="v">0.09<span class="unit">мм/ч</span></div></div><div class="card metric"><small>Поровое давление</small><div class="v">64<span class="unit">кПа</span></div></div><div class="card metric"><small>Осадки за 24 часа</small><div class="v">27<span class="unit">мм</span></div></div>
+<div class="card map"><div class="cardhead"><b>Схема объекта и активные узлы</b><span>ЖИВАЯ МОДЕЛЬ</span></div><div class="scheme"><div class="route"></div><div class="zone" style="left:25%;top:22%"></div><div class="zone" style="right:14%;bottom:18%"></div><div class="node" style="left:12%;top:25%"><label>Голова</label></div><div class="node" style="left:31%;top:61%"><label>Трещина Т-4</label></div><div class="node" style="left:47%;top:32%"><label>Репер R-03</label></div><div class="node" style="left:63%;top:68%"><label>Пьезометр</label></div><div class="node" style="left:77%;top:22%"><label>Подошва</label></div><div class="node" style="left:84%;top:55%"><label>Дорога</label></div></div></div>
+<div class="card alerts"><div class="cardhead"><b>Последние события</b><span>АВТОКЛАССИФИКАЦИЯ</span></div><div class="alertrow"><time>11:43</time><div>Ускорение смещения репера R-03<br><small style="color:var(--muted)">GNSS R-03</small></div><span class="sev high">Высокий</span></div><div class="alertrow"><time>11:10</time><div>Поровое давление выше недельного фона<br><small style="color:var(--muted)">PZ-05</small></div><span class="sev mid">Средний</span></div><div class="alertrow"><time>09:02</time><div>Изменение контраста метки на камере<br><small style="color:var(--muted)">Камера C-04</small></div><span class="sev mid">Проверка</span></div></div>
+<div class="card sensors"><div class="cardhead"><b>Состояние подсистем</b><span>ТЕЛЕМЕТРИЯ</span></div><div class="sensorrow"><div>Голова оползня</div><small>GNSS/реперы/камера</small><div style="display:flex;gap:8px;align-items:center"><span>1.8 мм/сут</span><i class="status warn"></i></div></div><div class="sensorrow"><div>Тело массива</div><small>Инклинометры</small><div style="display:flex;gap:8px;align-items:center"><span>8/8</span><i class="status ok"></i></div></div><div class="sensorrow"><div>Подошва</div><small>Пьезометры</small><div style="display:flex;gap:8px;align-items:center"><span>64 кПа</span><i class="status warn"></i></div></div><div class="sensorrow"><div>Трещина Т-4</div><small>Экстензометр/камера</small><div style="display:flex;gap:8px;align-items:center"><span>0.7 мм</span><i class="status ok"></i></div></div><div class="sensorrow"><div>Метеопост</div><small>Осадки/температура</small><div style="display:flex;gap:8px;align-items:center"><span>27 мм</span><i class="status warn"></i></div></div></div>
+<div class="card chart"><div class="cardhead"><b>Тренд ключевого параметра</b><span>ПОСЛЕДНИЕ 6 ЧАСОВ</span></div><canvas id="chart"></canvas></div>
+<div class="card ai"><div class="cardhead"><b>Умный ассистент: текущая оценка</b><span>РЕКОМЕНДАЦИЯ, НЕ АВТОРЕШЕНИЕ</span></div><div class="aiBox" id="aiText">Репер R-03 ускорился, однако соседние точки пока стабильны. Возможны локальное движение или ошибка фиксации. Рекомендовано проверить крепление репера, сопоставить с инклинометром I-03 и не повышать уровень опасности до подтверждения вторым независимым каналом.</div><div class="aiActions"><button class="action" onclick="explain()">Объяснить проще</button><button class="action" onclick="makeTask()">Создать задачу</button><button class="action" onclick="buildReport()">Сформировать отчёт</button></div></div>
+<div class="card logic"><div class="cardhead"><b>Активные правила корреляции</b><span>5 СЦЕНАРИЕВ</span></div><div class="rule"><i>↳</i><span>Скорость смещения растёт + поровое давление растёт → инженерная тревога</span></div><div class="rule"><i>↳</i><span>Раскрытие трещины + визуальное изменение → выезд на обследование</span></div><div class="rule"><i>↳</i><span>Осадки выше порога без движения → усиленный режим наблюдения</span></div><div class="rule"><i>↳</i><span>Движение одного репера без соседних → проверка качества измерения</span></div><div class="rule"><i>↳</i><span>Ускорение важнее единичного абсолютного значения</span></div></div>
+</div>
+</section>
+
+<section class="view" id="sensors"><div class="notice"><b>Датчики и каналы.</b><br><br>Этот экран в боевой версии содержит паспорт каждого прибора: тип, серийный номер, координаты, дату поверки, диапазон, качество сигнала, питание, историю отказов и график. Структура уже заложена, а текущие показатели представлены в режиме опытной эксплуатации.</div></section>
+<section class="view" id="events"><div class="notice"><b>Журнал событий.</b><br><br>Каждая тревога объединяет время, источники данных, кадр/видеофрагмент, значения до и после события, решение оператора и итоговый статус. Кнопки фильтрации и экспорт добавляются после подключения реальной базы данных.</div></section>
+<section class="view" id="assistant"><div class="notice"><b>Умный ассистент.</b><br><br>Ассистент объясняет причину тревоги, показывает использованные сигналы, отделяет факт от предположения и предлагает проверяемый порядок действий. Он не должен самостоятельно объявлять эвакуацию или заменять ответственного инженера.</div></section>
+<section class="view" id="model"><div class="notice"><b>Научно-инженерная основа системы.</b><div class="science">Для оползня критичны не только осадки, но и внутреннее состояние массива. Поэтому система объединяет смещение поверхности, деформации на глубине, поровое давление, раскрытие трещин и метеоданные.</div><br>Архитектура: камеры и приборы → шлюз протоколов → база временных рядов → движок правил → видеоархив → интерфейс → уведомления. Все пороги опытного образца являются предварительными; на реальном объекте они задаются проектом мониторинга и калибруются специалистами.</div></section>
+</main>
+</div>
+<script>
+const accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(b.dataset.view).classList.add('active')});
+function tick(){document.getElementById('clock').textContent=new Date().toLocaleString('ru-RU');}
+tick();setInterval(tick,1000);
+const canvas=document.getElementById('chart'),ctx=canvas.getContext('2d');
+function draw(){
+ const dpr=devicePixelRatio||1,w=canvas.clientWidth,h=canvas.clientHeight;canvas.width=w*dpr;canvas.height=h*dpr;ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);
+ ctx.strokeStyle='rgba(255,255,255,.07)';ctx.lineWidth=1;for(let i=1;i<5;i++){ctx.beginPath();ctx.moveTo(0,h*i/5);ctx.lineTo(w,h*i/5);ctx.stroke()}
+ let pts=[];for(let i=0;i<40;i++)pts.push(h*.56+Math.sin(i/5)*18+(Math.random()-.5)*9-i*.25);
+ ctx.strokeStyle=accent;ctx.lineWidth=2;ctx.beginPath();pts.forEach((y,i)=>{let x=i*w/(pts.length-1);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();
+ ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.closePath();let g=ctx.createLinearGradient(0,0,0,h);g.addColorStop(0,accent+'55');g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fill()
+}
+draw();addEventListener('resize',draw);setInterval(draw,4500);
+const original=document.getElementById('aiText').textContent;
+function explain(){document.getElementById('aiText').textContent='Простыми словами: система заметила не одно случайное значение, а устойчивое сочетание признаков. Сначала нужно проверить оборудование и подтвердить событие независимым способом, затем действовать по регламенту.'}
+function makeTask(){alert('Задача создана и привязана к событию, данным и видео.')}
+function buildReport(){alert('Отчёт сформирован: графики, кадры и журнал решений подготовлены к выгрузке.')}
+setInterval(()=>{document.querySelectorAll('.metric .v').forEach((el,i)=>{if(i<3&&Math.random()>.65){el.style.opacity=.55;setTimeout(()=>el.style.opacity=1,180)}})},1800);
+</script>
+</body>
+</html></template>
+
+<template id="app-06"><!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Контроль промышленной безопасности</title>
+<style>
+:root{--accent:#ff6f91;--bg:#071018;--panel:#0d1924;--panel2:#101f2c;--line:#213545;--text:#e9f2f8;--muted:#87a0b3;--ok:#53e09a;--warn:#ffc857;--bad:#ff667d}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 75% 0,#10273a 0,#071018 34%,#050b10 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+button{font:inherit}.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.side{border-right:1px solid var(--line);background:rgba(5,12,18,.86);backdrop-filter:blur(14px);padding:22px 16px;position:sticky;top:0;height:100vh}
+.brand{display:flex;gap:12px;align-items:center;padding:4px 8px 24px}.logo{width:38px;height:38px;border:1px solid var(--accent);border-radius:11px;display:grid;place-items:center;box-shadow:0 0 28px color-mix(in srgb,var(--accent) 30%,transparent);font-weight:800;color:var(--accent)}.brand b{font-size:13px;letter-spacing:.12em}.brand small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+.nav button{width:100%;border:0;background:transparent;color:var(--muted);text-align:left;padding:12px 12px;border-radius:10px;margin:3px 0;cursor:pointer}.nav button.active,.nav button:hover{background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 14%,transparent),transparent);color:var(--text);box-shadow:inset 3px 0 var(--accent)}
+.sidefoot{position:absolute;bottom:18px;left:16px;right:16px;padding:13px;border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:11px}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);margin-right:7px}
+.main{padding:22px 24px 40px;overflow:hidden}.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}.developer-credit{margin:0 0 7px;color:var(--accent);font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}.title h1{font-size:23px;margin:0 0 5px}.title p{margin:0;color:var(--muted);font-size:13px}.topright{display:flex;gap:8px;align-items:center}.pill{border:1px solid var(--line);background:#0b1721;color:var(--muted);padding:8px 11px;border-radius:999px;font-size:11px}.pill strong{color:var(--text)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:13px}.card{background:linear-gradient(150deg,rgba(18,35,48,.95),rgba(9,20,29,.95));border:1px solid var(--line);border-radius:15px;padding:15px;box-shadow:0 16px 45px rgba(0,0,0,.2)}.metric{grid-column:span 3;min-height:105px}.metric small{color:var(--muted);font-size:11px}.metric .v{font-size:27px;font-weight:750;margin-top:18px;letter-spacing:-.03em}.metric .unit{font-size:11px;color:var(--accent);margin-left:5px}.metric:after{content:"";display:block;height:2px;background:linear-gradient(90deg,var(--accent),transparent);margin-top:13px}
+.map{grid-column:span 8;min-height:355px}.alerts{grid-column:span 4;min-height:355px}.sensors{grid-column:span 5}.chart{grid-column:span 7}.ai{grid-column:span 7}.logic{grid-column:span 5}
+.cardhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.cardhead b{font-size:13px}.cardhead span{font-size:10px;color:var(--muted)}
+.scheme{position:relative;height:292px;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#09141e,#11283a);border:1px solid #223b4e}
+.scheme:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:28px 28px}
+.route{position:absolute;left:7%;top:51%;width:84%;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);transform:rotate(-8deg);box-shadow:0 0 13px var(--accent)}.zone{position:absolute;width:110px;height:68px;border:1px dashed color-mix(in srgb,var(--accent) 65%,white);background:color-mix(in srgb,var(--accent) 8%,transparent);border-radius:50%}
+.node{position:absolute;width:13px;height:13px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 15%,transparent),0 0 20px var(--accent);animation:pulse 2s infinite}.node label{position:absolute;white-space:nowrap;left:17px;top:-4px;font-size:10px;color:#c8dae7}
+@keyframes pulse{50%{box-shadow:0 0 0 10px transparent,0 0 25px var(--accent)}}
+.alertrow,.sensorrow{display:grid;gap:8px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:11px}.alertrow{grid-template-columns:40px 1fr auto}.alertrow:last-child,.sensorrow:last-child{border:0}.alertrow time{color:var(--muted)}.sev{font-size:9px;padding:4px 6px;border-radius:999px;border:1px solid var(--line);height:max-content}.sev.high{color:var(--bad)}.sev.mid{color:var(--warn)}.sev.low{color:var(--muted)}
+.sensorrow{grid-template-columns:1.1fr 1.5fr auto}.sensorrow small{color:var(--muted)}.status{width:8px;height:8px;border-radius:50%;margin-top:4px}.status.ok{background:var(--ok)}.status.warn{background:var(--warn)}
+canvas{width:100%;height:210px;display:block}.aiBox{border-left:3px solid var(--accent);padding:12px 13px;background:color-mix(in srgb,var(--accent) 7%,transparent);border-radius:0 10px 10px 0;font-size:12px;line-height:1.55;color:#d8e5ed}.aiActions{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}.action{border:1px solid var(--line);background:#0b1721;color:var(--text);padding:8px 10px;border-radius:9px;font-size:10px;cursor:pointer}.action:hover{border-color:var(--accent)}
+.rule{display:flex;gap:9px;font-size:11px;line-height:1.4;padding:7px 0;color:#c7d6e0}.rule i{font-style:normal;color:var(--accent);font-weight:700}.view{display:none}.view.active{display:block}.notice{padding:14px;border:1px solid var(--line);border-radius:12px;background:#0a1620;color:var(--muted);font-size:12px;line-height:1.6}.science{margin-top:13px;color:var(--muted);font-size:11px;line-height:1.55}
+@media(max-width:900px){.app{grid-template-columns:1fr}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:12px}.brand{padding-bottom:10px}.nav{display:flex;overflow:auto;gap:4px}.nav button{width:auto;white-space:nowrap}.sidefoot{display:none}.main{padding:16px 12px 30px}.top{display:block}.topright{margin-top:12px;overflow:auto}.metric{grid-column:span 6}.map,.alerts,.sensors,.chart,.ai,.logic{grid-column:span 12}.title h1{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="brand"><div class="logo">SA</div><div><b>INDUSTRY-SAFE</b><small>ИНЖЕНЕРНАЯ СИСТЕМА</small></div></div>
+  <nav class="nav">
+    <button class="active" data-view="overview">Обзор</button>
+    <button data-view="sensors">Датчики</button>
+    <button data-view="events">События</button>
+    <button data-view="assistant">Умный ассистент</button>
+    <button data-view="model">Логика системы</button>
+  </nav>
+  <div class="sidefoot"><span class="dot"></span>Все ключевые узлы на связи<br><span id="clock"></span></div>
+</aside>
+<main class="main">
+<div class="top">
+ <div class="title"><div class="developer-credit">Developed by Alikhan Dzuev</div><h1>Контроль промышленной безопасности</h1><p>Опасные зоны, СИЗ, газовая среда, транспорт и технологические события</p></div>
+ <div class="topright"><div class="pill">Камер: <strong>20</strong></div><div class="pill">Датчиков: <strong>36</strong></div><div class="pill">Режим: <strong>Умеренный</strong></div></div>
+</div>
+
+<section class="view active" id="overview">
+<div class="grid">
+<div class="card metric"><small>Персонал в цехе</small><div class="v">32<span class="unit">чел.</span></div></div><div class="card metric"><small>Нарушения СИЗ</small><div class="v">2<span class="unit">за смену</span></div></div><div class="card metric"><small>Газовый индекс</small><div class="v">0<span class="unit">тревог</span></div></div><div class="card metric"><small>Опасные сближения</small><div class="v">3<span class="unit">за час</span></div></div>
+<div class="card map"><div class="cardhead"><b>Схема объекта и активные узлы</b><span>ЖИВАЯ МОДЕЛЬ</span></div><div class="scheme"><div class="route"></div><div class="zone" style="left:25%;top:22%"></div><div class="zone" style="right:14%;bottom:18%"></div><div class="node" style="left:12%;top:25%"><label>КПП</label></div><div class="node" style="left:31%;top:61%"><label>Линия 1</label></div><div class="node" style="left:47%;top:32%"><label>Газовая зона</label></div><div class="node" style="left:63%;top:68%"><label>Погрузка</label></div><div class="node" style="left:77%;top:22%"><label>Склад</label></div><div class="node" style="left:84%;top:55%"><label>Выход</label></div></div></div>
+<div class="card alerts"><div class="cardhead"><b>Последние события</b><span>АВТОКЛАССИФИКАЦИЯ</span></div><div class="alertrow"><time>11:44</time><div>Пешеход и погрузчик сблизились до 2.1 м<br><small style="color:var(--muted)">Зона L-02</small></div><span class="sev high">Высокий</span></div><div class="alertrow"><time>11:31</time><div>Не подтверждена каска у входа в цех<br><small style="color:var(--muted)">Камера C-05</small></div><span class="sev mid">Средний</span></div><div class="alertrow"><time>10:48</time><div>Загромождение прохода устранено<br><small style="color:var(--muted)">Камера C-11</small></div><span class="sev low">Закрыто</span></div></div>
+<div class="card sensors"><div class="cardhead"><b>Состояние подсистем</b><span>ТЕЛЕМЕТРИЯ</span></div><div class="sensorrow"><div>Производственная линия</div><small>Камеры/статус ПЛК</small><div style="display:flex;gap:8px;align-items:center"><span>Работа</span><i class="status ok"></i></div></div><div class="sensorrow"><div>Газовая зона</div><small>CH₄/CO/O₂</small><div style="display:flex;gap:8px;align-items:center"><span>Норма</span><i class="status ok"></i></div></div><div class="sensorrow"><div>Погрузочная зона</div><small>Камеры/радар</small><div style="display:flex;gap:8px;align-items:center"><span>3 сближения</span><i class="status warn"></i></div></div><div class="sensorrow"><div>Эвакуационные выходы</div><small>Контакт/камера</small><div style="display:flex;gap:8px;align-items:center"><span>Свободны</span><i class="status ok"></i></div></div><div class="sensorrow"><div>СИЗ</div><small>Умная аналитика</small><div style="display:flex;gap:8px;align-items:center"><span>2 события</span><i class="status warn"></i></div></div></div>
+<div class="card chart"><div class="cardhead"><b>Тренд ключевого параметра</b><span>ПОСЛЕДНИЕ 6 ЧАСОВ</span></div><canvas id="chart"></canvas></div>
+<div class="card ai"><div class="cardhead"><b>Умный ассистент: текущая оценка</b><span>РЕКОМЕНДАЦИЯ, НЕ АВТОРЕШЕНИЕ</span></div><div class="aiBox" id="aiText">Большинство опасных сближений происходит у слепого поворота L-02 между 10:30 и 12:00. Рекомендация: установить одностороннее движение погрузчиков в этот период и световой индикатор присутствия пешехода.</div><div class="aiActions"><button class="action" onclick="explain()">Объяснить проще</button><button class="action" onclick="makeTask()">Создать задачу</button><button class="action" onclick="buildReport()">Сформировать отчёт</button></div></div>
+<div class="card logic"><div class="cardhead"><b>Активные правила корреляции</b><span>5 СЦЕНАРИЕВ</span></div><div class="rule"><i>↳</i><span>Человек + движущийся механизм в опасном радиусе → немедленная тревога</span></div><div class="rule"><i>↳</i><span>Газ выше порога + человек в зоне → критический сценарий</span></div><div class="rule"><i>↳</i><span>Отсутствие СИЗ подтверждается несколькими кадрами, а не одним</span></div><div class="rule"><i>↳</i><span>Блокировка выхода > 60 сек → заявка ответственному</span></div><div class="rule"><i>↳</i><span>Остановка ПЛК + визуальное событие → пакет расследования</span></div></div>
+</div>
+</section>
+
+<section class="view" id="sensors"><div class="notice"><b>Датчики и каналы.</b><br><br>Этот экран в боевой версии содержит паспорт каждого прибора: тип, серийный номер, координаты, дату поверки, диапазон, качество сигнала, питание, историю отказов и график. Структура уже заложена, а текущие показатели представлены в режиме опытной эксплуатации.</div></section>
+<section class="view" id="events"><div class="notice"><b>Журнал событий.</b><br><br>Каждая тревога объединяет время, источники данных, кадр/видеофрагмент, значения до и после события, решение оператора и итоговый статус. Кнопки фильтрации и экспорт добавляются после подключения реальной базы данных.</div></section>
+<section class="view" id="assistant"><div class="notice"><b>Умный ассистент.</b><br><br>Ассистент объясняет причину тревоги, показывает использованные сигналы, отделяет факт от предположения и предлагает проверяемый порядок действий. Он не должен самостоятельно объявлять эвакуацию или заменять ответственного инженера.</div></section>
+<section class="view" id="model"><div class="notice"><b>Научно-инженерная основа системы.</b><div class="science">Видеоаналитика здесь — дополнительный слой контроля, а не замена инструктажам, ограждениям, блокировкам и ответственному персоналу. Решение должно снижать риск и давать проверяемые события.</div><br>Архитектура: камеры и приборы → шлюз протоколов → база временных рядов → движок правил → видеоархив → интерфейс → уведомления. Все пороги опытного образца являются предварительными; на реальном объекте они задаются проектом мониторинга и калибруются специалистами.</div></section>
+</main>
+</div>
+<script>
+const accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(b.dataset.view).classList.add('active')});
+function tick(){document.getElementById('clock').textContent=new Date().toLocaleString('ru-RU');}
+tick();setInterval(tick,1000);
+const canvas=document.getElementById('chart'),ctx=canvas.getContext('2d');
+function draw(){
+ const dpr=devicePixelRatio||1,w=canvas.clientWidth,h=canvas.clientHeight;canvas.width=w*dpr;canvas.height=h*dpr;ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);
+ ctx.strokeStyle='rgba(255,255,255,.07)';ctx.lineWidth=1;for(let i=1;i<5;i++){ctx.beginPath();ctx.moveTo(0,h*i/5);ctx.lineTo(w,h*i/5);ctx.stroke()}
+ let pts=[];for(let i=0;i<40;i++)pts.push(h*.56+Math.sin(i/5)*18+(Math.random()-.5)*9-i*.25);
+ ctx.strokeStyle=accent;ctx.lineWidth=2;ctx.beginPath();pts.forEach((y,i)=>{let x=i*w/(pts.length-1);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();
+ ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.closePath();let g=ctx.createLinearGradient(0,0,0,h);g.addColorStop(0,accent+'55');g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fill()
+}
+draw();addEventListener('resize',draw);setInterval(draw,4500);
+const original=document.getElementById('aiText').textContent;
+function explain(){document.getElementById('aiText').textContent='Простыми словами: система заметила не одно случайное значение, а устойчивое сочетание признаков. Сначала нужно проверить оборудование и подтвердить событие независимым способом, затем действовать по регламенту.'}
+function makeTask(){alert('Задача создана и привязана к событию, данным и видео.')}
+function buildReport(){alert('Отчёт сформирован: графики, кадры и журнал решений подготовлены к выгрузке.')}
+setInterval(()=>{document.querySelectorAll('.metric .v').forEach((el,i)=>{if(i<3&&Math.random()>.65){el.style.opacity=.55;setTimeout(()=>el.style.opacity=1,180)}})},1800);
+</script>
+</body>
+</html></template>
+
+<template id="app-07"><!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>«Чёрный ящик объекта»</title>
+<style>
+:root{--accent:#f3d66b;--bg:#071018;--panel:#0d1924;--panel2:#101f2c;--line:#213545;--text:#e9f2f8;--muted:#87a0b3;--ok:#53e09a;--warn:#ffc857;--bad:#ff667d}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 75% 0,#10273a 0,#071018 34%,#050b10 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+button{font:inherit}.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.side{border-right:1px solid var(--line);background:rgba(5,12,18,.86);backdrop-filter:blur(14px);padding:22px 16px;position:sticky;top:0;height:100vh}
+.brand{display:flex;gap:12px;align-items:center;padding:4px 8px 24px}.logo{width:38px;height:38px;border:1px solid var(--accent);border-radius:11px;display:grid;place-items:center;box-shadow:0 0 28px color-mix(in srgb,var(--accent) 30%,transparent);font-weight:800;color:var(--accent)}.brand b{font-size:13px;letter-spacing:.12em}.brand small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+.nav button{width:100%;border:0;background:transparent;color:var(--muted);text-align:left;padding:12px 12px;border-radius:10px;margin:3px 0;cursor:pointer}.nav button.active,.nav button:hover{background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 14%,transparent),transparent);color:var(--text);box-shadow:inset 3px 0 var(--accent)}
+.sidefoot{position:absolute;bottom:18px;left:16px;right:16px;padding:13px;border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:11px}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);margin-right:7px}
+.main{padding:22px 24px 40px;overflow:hidden}.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}.developer-credit{margin:0 0 7px;color:var(--accent);font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}.title h1{font-size:23px;margin:0 0 5px}.title p{margin:0;color:var(--muted);font-size:13px}.topright{display:flex;gap:8px;align-items:center}.pill{border:1px solid var(--line);background:#0b1721;color:var(--muted);padding:8px 11px;border-radius:999px;font-size:11px}.pill strong{color:var(--text)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:13px}.card{background:linear-gradient(150deg,rgba(18,35,48,.95),rgba(9,20,29,.95));border:1px solid var(--line);border-radius:15px;padding:15px;box-shadow:0 16px 45px rgba(0,0,0,.2)}.metric{grid-column:span 3;min-height:105px}.metric small{color:var(--muted);font-size:11px}.metric .v{font-size:27px;font-weight:750;margin-top:18px;letter-spacing:-.03em}.metric .unit{font-size:11px;color:var(--accent);margin-left:5px}.metric:after{content:"";display:block;height:2px;background:linear-gradient(90deg,var(--accent),transparent);margin-top:13px}
+.map{grid-column:span 8;min-height:355px}.alerts{grid-column:span 4;min-height:355px}.sensors{grid-column:span 5}.chart{grid-column:span 7}.ai{grid-column:span 7}.logic{grid-column:span 5}
+.cardhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.cardhead b{font-size:13px}.cardhead span{font-size:10px;color:var(--muted)}
+.scheme{position:relative;height:292px;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#09141e,#11283a);border:1px solid #223b4e}
+.scheme:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:28px 28px}
+.route{position:absolute;left:7%;top:51%;width:84%;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);transform:rotate(-8deg);box-shadow:0 0 13px var(--accent)}.zone{position:absolute;width:110px;height:68px;border:1px dashed color-mix(in srgb,var(--accent) 65%,white);background:color-mix(in srgb,var(--accent) 8%,transparent);border-radius:50%}
+.node{position:absolute;width:13px;height:13px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 15%,transparent),0 0 20px var(--accent);animation:pulse 2s infinite}.node label{position:absolute;white-space:nowrap;left:17px;top:-4px;font-size:10px;color:#c8dae7}
+@keyframes pulse{50%{box-shadow:0 0 0 10px transparent,0 0 25px var(--accent)}}
+.alertrow,.sensorrow{display:grid;gap:8px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:11px}.alertrow{grid-template-columns:40px 1fr auto}.alertrow:last-child,.sensorrow:last-child{border:0}.alertrow time{color:var(--muted)}.sev{font-size:9px;padding:4px 6px;border-radius:999px;border:1px solid var(--line);height:max-content}.sev.high{color:var(--bad)}.sev.mid{color:var(--warn)}.sev.low{color:var(--muted)}
+.sensorrow{grid-template-columns:1.1fr 1.5fr auto}.sensorrow small{color:var(--muted)}.status{width:8px;height:8px;border-radius:50%;margin-top:4px}.status.ok{background:var(--ok)}.status.warn{background:var(--warn)}
+canvas{width:100%;height:210px;display:block}.aiBox{border-left:3px solid var(--accent);padding:12px 13px;background:color-mix(in srgb,var(--accent) 7%,transparent);border-radius:0 10px 10px 0;font-size:12px;line-height:1.55;color:#d8e5ed}.aiActions{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}.action{border:1px solid var(--line);background:#0b1721;color:var(--text);padding:8px 10px;border-radius:9px;font-size:10px;cursor:pointer}.action:hover{border-color:var(--accent)}
+.rule{display:flex;gap:9px;font-size:11px;line-height:1.4;padding:7px 0;color:#c7d6e0}.rule i{font-style:normal;color:var(--accent);font-weight:700}.view{display:none}.view.active{display:block}.notice{padding:14px;border:1px solid var(--line);border-radius:12px;background:#0a1620;color:var(--muted);font-size:12px;line-height:1.6}.science{margin-top:13px;color:var(--muted);font-size:11px;line-height:1.55}
+@media(max-width:900px){.app{grid-template-columns:1fr}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:12px}.brand{padding-bottom:10px}.nav{display:flex;overflow:auto;gap:4px}.nav button{width:auto;white-space:nowrap}.sidefoot{display:none}.main{padding:16px 12px 30px}.top{display:block}.topright{margin-top:12px;overflow:auto}.metric{grid-column:span 6}.map,.alerts,.sensors,.chart,.ai,.logic{grid-column:span 12}.title h1{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="brand"><div class="logo">SA</div><div><b>OBJECT-BLACKBOX</b><small>ИНЖЕНЕРНАЯ СИСТЕМА</small></div></div>
+  <nav class="nav">
+    <button class="active" data-view="overview">Обзор</button>
+    <button data-view="sensors">Датчики</button>
+    <button data-view="events">События</button>
+    <button data-view="assistant">Умный ассистент</button>
+    <button data-view="model">Логика системы</button>
+  </nav>
+  <div class="sidefoot"><span class="dot"></span>Все ключевые узлы на связи<br><span id="clock"></span></div>
+</aside>
+<main class="main">
+<div class="top">
+ <div class="title"><div class="developer-credit">Developed by Alikhan Dzuev</div><h1>«Чёрный ящик объекта»</h1><p>Единая временная шкала видео, датчиков, автоматики и действий персонала</p></div>
+ <div class="topright"><div class="pill">Камер: <strong>14</strong></div><div class="pill">Датчиков: <strong>58</strong></div><div class="pill">Режим: <strong>Система исправна</strong></div></div>
+</div>
+
+<section class="view active" id="overview">
+<div class="grid">
+<div class="card metric"><small>Записей за сутки</small><div class="v">18 426<span class="unit">событий</span></div></div><div class="card metric"><small>Синхронизация времени</small><div class="v">±18<span class="unit">мс</span></div></div><div class="card metric"><small>Целостность архива</small><div class="v">100<span class="unit">%</span></div></div><div class="card metric"><small>Хранение</small><div class="v">91<span class="unit">день</span></div></div>
+<div class="card map"><div class="cardhead"><b>Схема объекта и активные узлы</b><span>ЖИВАЯ МОДЕЛЬ</span></div><div class="scheme"><div class="route"></div><div class="zone" style="left:25%;top:22%"></div><div class="zone" style="right:14%;bottom:18%"></div><div class="node" style="left:12%;top:25%"><label>Камеры</label></div><div class="node" style="left:31%;top:61%"><label>Датчики</label></div><div class="node" style="left:47%;top:32%"><label>ПЛК</label></div><div class="node" style="left:63%;top:68%"><label>Операторы</label></div><div class="node" style="left:77%;top:22%"><label>Архив</label></div><div class="node" style="left:84%;top:55%"><label>Отчёт</label></div></div></div>
+<div class="card alerts"><div class="cardhead"><b>Последние события</b><span>АВТОКЛАССИФИКАЦИЯ</span></div><div class="alertrow"><time>11:45</time><div>Сформирован пакет инцидента #2048<br><small style="color:var(--muted)">Автоматика</small></div><span class="sev low">Инфо</span></div><div class="alertrow"><time>11:12</time><div>Рассинхронизация камеры C-09: 84 мс<br><small style="color:var(--muted)">NTP-контроль</small></div><span class="sev mid">Технический</span></div><div class="alertrow"><time>10:30</time><div>Проверка хешей архива завершена<br><small style="color:var(--muted)">Хранилище</small></div><span class="sev low">Закрыто</span></div></div>
+<div class="card sensors"><div class="cardhead"><b>Состояние подсистем</b><span>ТЕЛЕМЕТРИЯ</span></div><div class="sensorrow"><div>Видеоархив</div><small>14 каналов</small><div style="display:flex;gap:8px;align-items:center"><span>Запись</span><i class="status ok"></i></div></div><div class="sensorrow"><div>Телеметрия</div><small>58 параметров</small><div style="display:flex;gap:8px;align-items:center"><span>Онлайн</span><i class="status ok"></i></div></div><div class="sensorrow"><div>АСУ/ПЛК</div><small>247 событий</small><div style="display:flex;gap:8px;align-items:center"><span>Синхр.</span><i class="status ok"></i></div></div><div class="sensorrow"><div>Действия операторов</div><small>Журнал доступа</small><div style="display:flex;gap:8px;align-items:center"><span>Защищён</span><i class="status ok"></i></div></div><div class="sensorrow"><div>Резервирование</div><small>NAS + локальный узел</small><div style="display:flex;gap:8px;align-items:center"><span>Готово</span><i class="status ok"></i></div></div></div>
+<div class="card chart"><div class="cardhead"><b>Тренд ключевого параметра</b><span>ПОСЛЕДНИЕ 6 ЧАСОВ</span></div><canvas id="chart"></canvas></div>
+<div class="card ai"><div class="cardhead"><b>Умный ассистент: текущая оценка</b><span>РЕКОМЕНДАЦИЯ, НЕ АВТОРЕШЕНИЕ</span></div><div class="aiBox" id="aiText">По инциденту #2048 построена последовательность: падение давления → команда ПЛК → открытие двери → вход оператора → восстановление параметра. Противоречий между журналами нет. Для завершения расследования отсутствует только комментарий ответственного.</div><div class="aiActions"><button class="action" onclick="explain()">Объяснить проще</button><button class="action" onclick="makeTask()">Создать задачу</button><button class="action" onclick="buildReport()">Сформировать отчёт</button></div></div>
+<div class="card logic"><div class="cardhead"><b>Активные правила корреляции</b><span>5 СЦЕНАРИЕВ</span></div><div class="rule"><i>↳</i><span>Каждое событие получает единое точное время</span></div><div class="rule"><i>↳</i><span>Тревога автоматически сохраняет видео до и после события</span></div><div class="rule"><i>↳</i><span>Изменение настроек фиксируется с пользователем и причиной</span></div><div class="rule"><i>↳</i><span>Архив проверяется на целостность и попытки подмены</span></div><div class="rule"><i>↳</i><span>Отчёт собирает причинно-временную цепочку, а не россыпь логов</span></div></div>
+</div>
+</section>
+
+<section class="view" id="sensors"><div class="notice"><b>Датчики и каналы.</b><br><br>Этот экран в боевой версии содержит паспорт каждого прибора: тип, серийный номер, координаты, дату поверки, диапазон, качество сигнала, питание, историю отказов и график. Структура уже заложена, а текущие показатели представлены в режиме опытной эксплуатации.</div></section>
+<section class="view" id="events"><div class="notice"><b>Журнал событий.</b><br><br>Каждая тревога объединяет время, источники данных, кадр/видеофрагмент, значения до и после события, решение оператора и итоговый статус. Кнопки фильтрации и экспорт добавляются после подключения реальной базы данных.</div></section>
+<section class="view" id="assistant"><div class="notice"><b>Умный ассистент.</b><br><br>Ассистент объясняет причину тревоги, показывает использованные сигналы, отделяет факт от предположения и предлагает проверяемый порядок действий. Он не должен самостоятельно объявлять эвакуацию или заменять ответственного инженера.</div></section>
+<section class="view" id="model"><div class="notice"><b>Научно-инженерная основа системы.</b><div class="science">Ценность системы — доказательная временная линия. Она помогает эксплуатации и расследованию, но требует синхронизации часов, разграничения доступа, резервного хранения и защиты журналов от незаметного изменения.</div><br>Архитектура: камеры и приборы → шлюз протоколов → база временных рядов → движок правил → видеоархив → интерфейс → уведомления. Все пороги опытного образца являются предварительными; на реальном объекте они задаются проектом мониторинга и калибруются специалистами.</div></section>
+</main>
+</div>
+<script>
+const accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(b.dataset.view).classList.add('active')});
+function tick(){document.getElementById('clock').textContent=new Date().toLocaleString('ru-RU');}
+tick();setInterval(tick,1000);
+const canvas=document.getElementById('chart'),ctx=canvas.getContext('2d');
+function draw(){
+ const dpr=devicePixelRatio||1,w=canvas.clientWidth,h=canvas.clientHeight;canvas.width=w*dpr;canvas.height=h*dpr;ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);
+ ctx.strokeStyle='rgba(255,255,255,.07)';ctx.lineWidth=1;for(let i=1;i<5;i++){ctx.beginPath();ctx.moveTo(0,h*i/5);ctx.lineTo(w,h*i/5);ctx.stroke()}
+ let pts=[];for(let i=0;i<40;i++)pts.push(h*.56+Math.sin(i/5)*18+(Math.random()-.5)*9-i*.25);
+ ctx.strokeStyle=accent;ctx.lineWidth=2;ctx.beginPath();pts.forEach((y,i)=>{let x=i*w/(pts.length-1);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();
+ ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.closePath();let g=ctx.createLinearGradient(0,0,0,h);g.addColorStop(0,accent+'55');g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fill()
+}
+draw();addEventListener('resize',draw);setInterval(draw,4500);
+const original=document.getElementById('aiText').textContent;
+function explain(){document.getElementById('aiText').textContent='Простыми словами: система заметила не одно случайное значение, а устойчивое сочетание признаков. Сначала нужно проверить оборудование и подтвердить событие независимым способом, затем действовать по регламенту.'}
+function makeTask(){alert('Задача создана и привязана к событию, данным и видео.')}
+function buildReport(){alert('Отчёт сформирован: графики, кадры и журнал решений подготовлены к выгрузке.')}
+setInterval(()=>{document.querySelectorAll('.metric .v').forEach((el,i)=>{if(i<3&&Math.random()>.65){el.style.opacity=.55;setTimeout(()=>el.style.opacity=1,180)}})},1800);
+</script>
+</body>
+</html></template>
+
+<script>
+
+function loadProjectPhotos(){
+  const extensions=['jpg','jpeg','png','webp'];
+  document.querySelectorAll('.photo-slot').forEach(slot=>{
+    const img=slot.querySelector('.project-photo');
+    const base=slot.dataset.photoBase;
+    let i=0;
+    const tryNext=()=>{
+      if(i>=extensions.length){slot.classList.remove('loaded');return;}
+      img.onload=()=>slot.classList.add('loaded');
+      img.onerror=()=>{i++;tryNext();};
+      img.src=base+'.'+extensions[i];
+    };
+    tryNext();
+  });
+}
+loadProjectPhotos();
+
 const modal=document.getElementById('developmentsModal');
+const viewer=document.getElementById('appViewer');
+const frame=document.getElementById('appFrame');
+const viewerTitle=document.getElementById('viewerTitle');
 const openModal=()=>{modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'};
 const closeModal=()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow=''};
+const closeViewer=()=>{viewer.classList.remove('open');viewer.setAttribute('aria-hidden','true');frame.srcdoc='';document.body.style.overflow='hidden';openModal();};
+const exitViewer=()=>{viewer.classList.remove('open');viewer.setAttribute('aria-hidden','true');frame.srcdoc='';document.body.style.overflow='';};
 document.getElementById('openDevelopments').onclick=openModal;
 document.getElementById('openDevelopments2').onclick=openModal;
 document.getElementById('closeDevelopments').onclick=closeModal;
 modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
-addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
-document.getElementById('devSearch').addEventListener('input',e=>{
- const q=e.target.value.trim().toLowerCase();
- let n=0;
- document.querySelectorAll('.dev-card').forEach(card=>{
-   const show=!q||card.dataset.search.includes(q);
-   card.classList.toggle('hidden',!show);
-   if(show)n++;
- });
- document.getElementById('visibleCount').textContent=n;
-});
+document.getElementById('viewerBack').onclick=closeViewer;
+document.getElementById('viewerClose').onclick=exitViewer;
+document.querySelectorAll('.open-product').forEach(link=>link.addEventListener('click',e=>{
+  e.preventDefault();
+  const tpl=document.getElementById(link.dataset.app);
+  if(!tpl){ window.location.href=link.getAttribute('href'); return; }
+  viewerTitle.textContent=link.dataset.title || 'Разработка';
+  frame.srcdoc=tpl.innerHTML;
+  closeModal();
+  viewer.classList.add('open');
+  viewer.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+}));
+addEventListener('keydown',e=>{if(e.key==='Escape'){if(viewer.classList.contains('open')) exitViewer(); else closeModal();}});
+document.getElementById('devSearch').addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();let n=0;document.querySelectorAll('.dev-card').forEach(card=>{const show=!q||card.dataset.search.includes(q);card.classList.toggle('hidden',!show);if(show)n++;});document.getElementById('visibleCount').textContent=n;});
 </script>
 </body>
 </html>
